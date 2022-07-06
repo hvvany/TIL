@@ -8,6 +8,6 @@
 
 ## Day
 
-> [22.07.05](markdown_and_git.md)
+> [22.07.05](Git/[22.07.05]_markdown_and_git)
 >
-> 
+> [22.07.06](Git/[22.07.06]_git_and_github)
