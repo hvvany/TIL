@@ -2,9 +2,9 @@
 
 ## Tool
 
-[![Git](https://git-scm.com/images/logo@2x.png)](markdown_and_git)
+[![git](README.assets/git.png)](Git)
 
-[![markdown](https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Markdown-mark.svg/450px-Markdown-mark.svg.png)](markdown_and_git)
+[![Markdown-mark.svg](README.assets/Markdown-mark.svg.png)](Git/[22.07.05]_markdown_and_git)
 
 ## Day
 
