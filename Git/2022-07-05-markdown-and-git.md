@@ -356,7 +356,7 @@ DVCS 장점 => 원격 저장소를 통해 협업하고, 모든 히스토리를 �
 
 > ### Working Directory
 >
-> git add 000.txt
+> git add 000.txt   <->  git restore --staged
 >
 > ### Staging Area              => git status
 >
