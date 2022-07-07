@@ -8,7 +8,7 @@
 
 ​	**`나뭇가지`**처럼 메인 줄기에서 뻗어나가 서로 영향을 받지 않고 작업하고 다시 병합되는 구조
 
-![img](https://miro.medium.com/max/1400/1*dRtIbjRK64BCbXzT7f_rPw.png)	
+![branch](2022-07-07-github-pull-branch.assets/branch.png)	
 
 > 브랜치의 구조 ( 출처 : https://miro.medium.com/max/1400/1)
 
