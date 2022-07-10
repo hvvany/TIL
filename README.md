@@ -2,7 +2,7 @@
 
 ## ⚒️Tool
 
-[![git](README.assets/git.png)](Git)[![Markdown-mark.svg](README.assets/Markdown-mark.svg.png)](Git/[22.07.05]_markdown_and_git.md)
+[![Markdown-mark.svg](README.assets/Markdown-mark.svg.png)](Git/[22.07.05]_markdown_and_git.md)[![git](README.assets/git.png)](Git)
 
 ## 🌈Date
 
@@ -13,4 +13,6 @@
 > [22.07.07](Git/2022-07-07-github-pull-branch.md)
 >
 > [22.07.08](Special/2022-07-08-project-skills.md)
+>
+> [22.07.09](etc/2022-07-09-baeckjoon-tear.md)
 
