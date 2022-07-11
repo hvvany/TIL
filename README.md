@@ -2,7 +2,7 @@
 
 ## ⚒️Tool
 
-[![Markdown-mark.svg](README.assets/Markdown-mark.svg.png)](Git/[22.07.05]_markdown_and_git.md)[![git](README.assets/git.png)![python-logo@2x](README.assets/python-logo@2x.png)](Git)
+[![Markdown-mark.svg](README.assets/Markdown-mark.svg.png)](Git/[22.07.05]_markdown_and_git.md)[![git](README.assets/git.png)![python-logo@2x](README.assets/python-logo@2x.png)](Python)
 
 ## 🌈Date
 
@@ -17,4 +17,6 @@
 > [22.07.09](etc/2022-07-09-baeckjoon-tear.md)
 >
 > [22.07.10](etc/2022-07-10-search.md)
+>
+> [22.07.11](Python/2022-07-11-basic-of-python.md)
 
