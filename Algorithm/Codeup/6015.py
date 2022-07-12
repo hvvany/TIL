@@ -7,7 +7,7 @@
 # print(a)
 # print(b)
 # 과 같은 방법으로 두 정수를 입력받아 출력할 수 있다.
-a,b = input().split()
+a,b = input().split()  # input으로 리스트? 문자열이라서 공백은??
 a=int(a)
 b=int(b)
 print(a)

@@ -19,8 +19,7 @@
 #     print('D')
 # ...
 
-a = input().split()
-
+a = input()
 a = int(a)
 
 if a<0 :
