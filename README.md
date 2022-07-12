@@ -19,4 +19,6 @@
 > [22.07.10](etc/2022-07-10-search.md)
 >
 > [22.07.11](Python/2022-07-11-basic-of-python.md)
+>
+> [22.07.12](Python/2022-07-12-if-else-for-while.md)
 
