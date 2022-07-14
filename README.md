@@ -23,4 +23,6 @@
 > [22.07.12](Python/2022-07-12-if-else-for-while.md)
 >
 > [22.07.13](Python/2022-07-13-function.md)
+>
+> [22.07.14](Python/2022-07-14-method.md)
 
