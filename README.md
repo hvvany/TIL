@@ -25,4 +25,6 @@
 > [22.07.13](Python/2022-07-13-function.md)
 >
 > [22.07.14](Python/2022-07-14-method.md)
+>
+> [22.07.15](Python/2022-07-15-module.md)
 
