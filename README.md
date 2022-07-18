@@ -29,4 +29,8 @@
 > [22.07.15](Python/2022-07-15-module.md)
 >
 > [22.07.16](Python/2022-07-16-review-project.md)
+>
+> [22.07.17](etc/2022-07-17-shortcut-keys-vscode.md)
+>
+> [22.07.18](Python/2022-07-18-error-exception.md)
 
