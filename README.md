@@ -33,4 +33,6 @@
 > [22.07.17](etc/2022-07-17-shortcut-keys-vscode.md)
 >
 > [22.07.18](Python/2022-07-18-error-exception.md)
+>
+> [22.07.19](Python/2022-07-19-python-oop.md)
 
