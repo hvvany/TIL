@@ -35,4 +35,6 @@
 > [22.07.18](Python/2022-07-18-error-exception.md)
 >
 > [22.07.19](Python/2022-07-19-python-oop.md)
+>
+> [22.07.20](Python/2022-07-20-class.md)
 
