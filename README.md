@@ -37,4 +37,6 @@
 > [22.07.19](Python/2022-07-19-python-oop.md)
 >
 > [22.07.20](Python/2022-07-20-class.md)
+>
+> [22.07.21](Python/2022-07-21-python-more.md)
 
