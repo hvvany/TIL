@@ -57,7 +57,7 @@ for i in range(case):
     num = int(input())
     k=0
     num_str = ''
-    while True:
+    while cnt < 10:
         k += 1
         mult = num*k
         num_str += str(mult)
@@ -65,6 +65,4 @@ for i in range(case):
         for char in '0123456789':
             if char in num_str:
                 cnt += 1
-        if cnt == 10:
-            break
     print(f'#{i+1} {k*num}')
