@@ -119,194 +119,686 @@
 
    > 코드 리뷰
 
-   - ### env
-
-     - #### `.env`파일이란?
-
-       - git, 오픈소스에 올리면 안되는 값 존재한다. 사용자 API 키 값 같은!
-       - 이때 필요한 것이 **dotenv 패키지** 이며 환경변수 파일을 외부에 만들어 URL,포트, API_KEY등.. 을 저장시켜 소스코드 내에 하드코딩하지 않고 사용 할 수 있다.
-
-     - #### 프로젝트 최상위 루트에 파일 저장
-
-       - 외부 파일(.env)에 환경변수를 정의하여 변수로 받아오는 이유는 보안과 유지보수에 용이하기 때문
-
-     - #### `.env` 파일 사용법
-
-       - .env.{mode명}
-       - .env.--- 파일의 내용을 수정하면 npm 으로 다시 시작해야합니다.
-       - 
+   - .env파일을 활용하였다. 나도 다음 블로그 내용으로 .env에 대해서 공부해봐야겠다.
 
    
 
    
-
    
-
-   
-
 3. ## 특정 조건에 맞는 인기 영화 조회
+
+   - 인기 영화 목록 중 평점이 8점 이상인 영화 목록을 출력합니다.
+   - requests 라이브러리를 활용하여 TMDB에서 현재 인기 있는 영화 목록(Get Populations) 데이터를 요청합니다.
+   - 응답 받은 데이터 중 평점(`vote_average`)이 8점 이상인 영화 목록을 리스트로 반환하는 함수를 작성합니다.
+
+   > 결과 예시
+
+   ```json
+   [
+       {
+           "adult": false,
+           "backdrop_path": "/odJ4hx6g6vBt4lBWKFD1tI8WS4x.jpg",
+           "genre_ids": [
+               28,
+               18
+           ],
+           "id": 361743,
+           "original_language": "en",
+           "original_title": "Top Gun: Maverick",
+           "overview": "최고의 파일럿이자 전설적인 인물 매버릭은 자신이 졸업한 훈련학교 교관으로 발탁된다. 그의 명성을 모르던 팀원들은 매버릭의 지시를 무시하지만 실전을 방불케 하는 상공 훈련에서 눈으로 봐도 믿기 힘든 전설적인 조종 실력에 모두가 압도된다. 매버릭의 지휘 아래 견고한 팀워크를 쌓아가던 팀원들에게 국경을 뛰어넘는 위험한 임무가 주어지자 매버릭은 자신이 가르친 동료들과 함께 마지막이 될지 모를 하늘 위 비행에 나서는데…",
+           "popularity": 8058.252,
+           "poster_path": "/jMLiTgCo0vXJuwMzZGoNOUPfuj7.jpg",
+           "release_date": "2022-05-24",
+           "title": "탑건: 매버릭",
+           "video": false,
+           "vote_average": 8.4,
+           "vote_count": 1620
+       },
+       {
+           "adult": false,
+           "backdrop_path": "/ocUp7DJBIc8VJgLEw1prcyK1dYv.jpg",
+           "genre_ids": [
+               28,
+               12,
+               878
+           ],
+           "id": 634649,
+           "original_language": "en",
+           "original_title": "Spider-Man: No Way Home",
+           "overview": "미스테리오의 계략으로 세상에 정체가 탄로난 스파이더맨 피터 파커는 하루 아침에 평범한 일상을 잃게 된다. 문제를 해결하기 위해 닥터 스트레인지를 찾아가 도움을 청하지만 뜻하지 않게 멀티버스가 열리면서 각기 다른 차원의 불청객들이 나타난다. 닥터 옥토퍼스를 비롯해 스파이더맨에게 깊은 원한을 가진 숙적들의 강력한 공격에 피터 파커는 사상 최악의 위기를 맞게 되는데…",
+           "popularity": 1513.591,
+           "poster_path": "/voddFVdjUoAtfoZZp2RUmuZILDI.jpg",
+           "release_date": "2021-12-15",
+           "title": "스파이더맨: 노 웨이 홈",
+           "video": false,
+           "vote_average": 8.1,
+           "vote_count": 14255
+       }
+   ]
+   ```
+
+   > 내가 작성한 코드
+
+   ```python
+   import requests
+   from pprint import pprint
+   
+   
+   def ranking():
+       pass 
+       # 여기에 코드를 작성합니다.  
+       base_url = 'https://api.themoviedb.org/3'
+       path = '/movie/popular'
+       params = {
+           'api_key': 'e2be94a1762b4b81af8b205d5e2bcb5f',
+           'language': 'ko-KR'
+       }
+       response = requests.get(base_url+path, params=params).json()
+       high_vote_lst = []
+       mv_lst = []
+       results = response['results']
+       for mv in results:
+         high_vote_lst.append(mv['vote_average'])
+       for score in sorted(high_vote_lst)[-1:-5:-1]:
+         for i in range(len(results)):
+           if len(mv_lst) == 5:
+             break
+           if results[i]['vote_average'] == score:
+             mv_lst.append(results[i])
+           
+       return mv_lst
+   
+   
+   
+   # 아래의 코드는 수정하지 않습니다.
+   if __name__ == '__main__':
+       """
+       popular 영화목록을 정렬하여 평점순으로 5개 영화 반환
+       (주의) popular 영화목록의 경우 시기에 따라 아래 예시 출력과 차이가 있을 수 있음
+       """
+       pprint(ranking())
+       
+       """
+       [{'adult': False,
+         'backdrop_path': '/odJ4hx6g6vBt4lBWKFD1tI8WS4x.jpg',
+         'genre_ids': [28, 18],
+         'id': 361743,
+         'original_language': 'en',
+         'original_title': 'Top Gun: Maverick',
+         'overview': '최고의 파일럿이자 전설적인 인물 매버릭은 자신이 졸업한 훈련학교 교관으로 발탁된다. 그의 명성을 모르던 팀원들은 '
+                     '매버릭의 지시를 무시하지만 실전을 방불케 하는 상공 훈련에서 눈으로 봐도 믿기 힘든 전설적인 조종 실력에 모두가 '
+                     '압도된다. 매버릭의 지휘 아래 견고한 팀워크를 쌓아가던 팀원들에게 국경을 뛰어넘는 위험한 임무가 주어지자 매버릭은 '
+                     '자신이 가르친 동료들과 함께 마지막이 될지 모를 하늘 위 비행에 나서는데…',
+         'popularity': 911.817,
+         'poster_path': '/jMLiTgCo0vXJuwMzZGoNOUPfuj7.jpg',
+         'release_date': '2022-06-22',
+         'title': '탑건: 매버릭',
+         'video': False,
+         'vote_average': 8.4,
+         'vote_count': 1463},
+       ..생략..,
+       }]
+       """
+   ```
+
+   > 전공자 작성 코드
+
+   ```python
+   import requests
+   from pprint import pprint
+   from dotenv import load_dotenv
+   import os
+   
+   load_dotenv()
+   API_KEY_TOKEN = os.getenv('my_api_key')
+   
+   
+   def vote_average_movies():
+       pass 
+       # 여기에 코드를 작성합니다.
+       BASE_URL = 'https://api.themoviedb.org/3'
+       path = '/movie/popular'
+       params = {
+           'api_key': API_KEY_TOKEN,
+           'language': 'ko-KR'
+       }
+   
+       response = requests.get(BASE_URL+path, params=params).json()
+       result = response.get('results')
+       new_res = []
+       for res in result:
+         if res.get('vote_average') >= 8.0:
+           new_res.append(res)
+       
+       return new_res
+   
+   
+   # 아래의 코드는 수정하지 않습니다.
+   if __name__ == '__main__':
+       """
+       popular 영화목록중 vote_average가 8 이상인 영화목록 반환
+       (주의) popular 영화목록의 경우 시기에 따라 아래 예시 출력과 차이가 있을 수 있음
+       """
+       pprint(vote_average_movies())
+       """
+       [{'adult': False,
+         'backdrop_path': '/ocUp7DJBIc8VJgLEw1prcyK1dYv.jpg',
+         'genre_ids': [28, 12, 878],
+         'id': 634649,
+         'original_language': 'en',
+         'original_title': 'Spider-Man: No Way Home',
+         'overview': '미스테리오의 계략으로 세상에 정체가 탄로난 스파이더맨 피터 파커는 하루 아침에 평범한 일상을 잃게 된다. 문제를 '
+                     '해결하기 위해 닥터 스트레인지를 찾아가 도움을 청하지만 뜻하지 않게 멀티버스가 열리면서 각기 다른 차원의 '
+                     '불청객들이 나타난다. 닥터 옥토퍼스를 비롯해 스파이더맨에게 깊은 원한을 가진 숙적들의 강력한 공격에 피터 파커는 '
+                     '사상 최악의 위기를 맞게 되는데…',
+         'popularity': 1842.592,
+         'poster_path': '/voddFVdjUoAtfoZZp2RUmuZILDI.jpg',
+         'release_date': '2021-12-15',
+         'title': '스파이더맨: 노 웨이 홈',
+         'video': False,
+         'vote_average': 8.1,
+         'vote_count': 13954},
+       ..생략..,
+       }]
+       """
+   ```
+
+   > 코드 리뷰
+
+   - 거의 같다! 주소를 불러와서 API를 사용하는 방법 이외에 코드 구현은 크게 복잡하지 않아서 나와 비슷하다.
+
+   
+
+   
+
+   
 
 4. ## 특정 조건에 맞는 인기 영화 조회
 
+   - 인기 영화 목록 중 평점이 8점 이상인 영화 목록을 출력합니다.
+   - requests 라이브러리를 활용하여 TMDB에서 현재 인기 있는 영화 목록(Get Populations) 데이터를 요청합니다.
+   - 응답 받은 데이터 중 평점(`vote_average`)이 8점 이상인 영화 목록을 리스트로 반환하는 함수를 작성합니다.
+
+   > 결과 예시
+
+   ```json
+   [
+       {
+           "adult": false,
+           "backdrop_path": "/odJ4hx6g6vBt4lBWKFD1tI8WS4x.jpg",
+           "genre_ids": [
+               28,
+               18
+           ],
+           "id": 361743,
+           "original_language": "en",
+           "original_title": "Top Gun: Maverick",
+           "overview": "최고의 파일럿이자 전설적인 인물 매버릭은 자신이 졸업한 훈련학교 교관으로 발탁된다. 그의 명성을 모르던 팀원들은 매버릭의 지시를 무시하지만 실전을 방불케 하는 상공 훈련에서 눈으로 봐도 믿기 힘든 전설적인 조종 실력에 모두가 압도된다. 매버릭의 지휘 아래 견고한 팀워크를 쌓아가던 팀원들에게 국경을 뛰어넘는 위험한 임무가 주어지자 매버릭은 자신이 가르친 동료들과 함께 마지막이 될지 모를 하늘 위 비행에 나서는데…",
+           "popularity": 8058.252,
+           "poster_path": "/jMLiTgCo0vXJuwMzZGoNOUPfuj7.jpg",
+           "release_date": "2022-05-24",
+           "title": "탑건: 매버릭",
+           "video": false,
+           "vote_average": 8.4,
+           "vote_count": 1620
+       },
+       {
+           "adult": false,
+           "backdrop_path": "/ocUp7DJBIc8VJgLEw1prcyK1dYv.jpg",
+           "genre_ids": [
+               28,
+               12,
+               878
+           ],
+           "id": 634649,
+           "original_language": "en",
+           "original_title": "Spider-Man: No Way Home",
+           "overview": "미스테리오의 계략으로 세상에 정체가 탄로난 스파이더맨 피터 파커는 하루 아침에 평범한 일상을 잃게 된다. 문제를 해결하기 위해 닥터 스트레인지를 찾아가 도움을 청하지만 뜻하지 않게 멀티버스가 열리면서 각기 다른 차원의 불청객들이 나타난다. 닥터 옥토퍼스를 비롯해 스파이더맨에게 깊은 원한을 가진 숙적들의 강력한 공격에 피터 파커는 사상 최악의 위기를 맞게 되는데…",
+           "popularity": 1513.591,
+           "poster_path": "/voddFVdjUoAtfoZZp2RUmuZILDI.jpg",
+           "release_date": "2021-12-15",
+           "title": "스파이더맨: 노 웨이 홈",
+           "video": false,
+           "vote_average": 8.1,
+           "vote_count": 14255
+       }
+   ]
+   ```
+
+   > 내가 작성한 코드
+
+   ```python
+   import requests
+   from pprint import pprint
+   
+   
+   def vote_average_movies():
+       pass 
+       # 여기에 코드를 작성합니다.  
+       base_url = 'https://api.themoviedb.org/3'
+       path = '/movie/popular'
+       params = {
+           'api_key': 'e2be94a1762b4b81af8b205d5e2bcb5f',
+           'language': 'ko-KR'
+       }
+       response = requests.get(base_url+path, params=params).json()
+       high_vote_lst = []
+       results = response['results']
+       for mv in results:
+         if mv['vote_average'] >= 8:
+           high_vote_lst.append(mv)
+   
+       return high_vote_lst
+   
+   # 아래의 코드는 수정하지 않습니다.
+   if __name__ == '__main__':
+       """
+       popular 영화목록중 vote_average가 8 이상인 영화목록 반환
+       (주의) popular 영화목록의 경우 시기에 따라 아래 예시 출력과 차이가 있을 수 있음
+       """
+       pprint(vote_average_movies())
+       """
+       [{'adult': False,
+         'backdrop_path': '/ocUp7DJBIc8VJgLEw1prcyK1dYv.jpg',
+         'genre_ids': [28, 12, 878],
+         'id': 634649,
+         'original_language': 'en',
+         'original_title': 'Spider-Man: No Way Home',
+         'overview': '미스테리오의 계략으로 세상에 정체가 탄로난 스파이더맨 피터 파커는 하루 아침에 평범한 일상을 잃게 된다. 문제를 '
+                     '해결하기 위해 닥터 스트레인지를 찾아가 도움을 청하지만 뜻하지 않게 멀티버스가 열리면서 각기 다른 차원의 '
+                     '불청객들이 나타난다. 닥터 옥토퍼스를 비롯해 스파이더맨에게 깊은 원한을 가진 숙적들의 강력한 공격에 피터 파커는 '
+                     '사상 최악의 위기를 맞게 되는데…',
+         'popularity': 1842.592,
+         'poster_path': '/voddFVdjUoAtfoZZp2RUmuZILDI.jpg',
+         'release_date': '2021-12-15',
+         'title': '스파이더맨: 노 웨이 홈',
+         'video': False,
+         'vote_average': 8.1,
+         'vote_count': 13954},
+       ..생략..,
+       }]
+       """
+   ```
+
+   > 전공자 작성 코드
+
+   ```python
+   import requests
+   from pprint import pprint
+   from dotenv import load_dotenv
+   import os
+   
+   load_dotenv()
+   API_KEY_TOKEN = os.getenv('my_api_key')
+   
+   
+   def vote_average_movies():
+       pass 
+       # 여기에 코드를 작성합니다.
+       BASE_URL = 'https://api.themoviedb.org/3'
+       path = '/movie/popular'
+       params = {
+           'api_key': API_KEY_TOKEN,
+           'language': 'ko-KR'
+       }
+   
+       response = requests.get(BASE_URL+path, params=params).json()
+       result = response.get('results')
+       new_res = []
+       for res in result:
+         if res.get('vote_average') >= 8.0:
+           new_res.append(res)
+       
+       return new_res
+   
+   
+   # 아래의 코드는 수정하지 않습니다.
+   if __name__ == '__main__':
+       """
+       popular 영화목록중 vote_average가 8 이상인 영화목록 반환
+       (주의) popular 영화목록의 경우 시기에 따라 아래 예시 출력과 차이가 있을 수 있음
+       """
+       pprint(vote_average_movies())
+       """
+       [{'adult': False,
+         'backdrop_path': '/ocUp7DJBIc8VJgLEw1prcyK1dYv.jpg',
+         'genre_ids': [28, 12, 878],
+         'id': 634649,
+         'original_language': 'en',
+         'original_title': 'Spider-Man: No Way Home',
+         'overview': '미스테리오의 계략으로 세상에 정체가 탄로난 스파이더맨 피터 파커는 하루 아침에 평범한 일상을 잃게 된다. 문제를 '
+                     '해결하기 위해 닥터 스트레인지를 찾아가 도움을 청하지만 뜻하지 않게 멀티버스가 열리면서 각기 다른 차원의 '
+                     '불청객들이 나타난다. 닥터 옥토퍼스를 비롯해 스파이더맨에게 깊은 원한을 가진 숙적들의 강력한 공격에 피터 파커는 '
+                     '사상 최악의 위기를 맞게 되는데…',
+         'popularity': 1842.592,
+         'poster_path': '/voddFVdjUoAtfoZZp2RUmuZILDI.jpg',
+         'release_date': '2021-12-15',
+         'title': '스파이더맨: 노 웨이 홈',
+         'video': False,
+         'vote_average': 8.1,
+         'vote_count': 13954},
+       ..생략..,
+       }]
+       """
+   ```
+
+   > 코드 리뷰
+
+   - 거의 같다! 주소를 불러와서 API를 사용하는 방법 이외에 코드 구현은 크게 복잡하지 않아서 나와 비슷하다.
+
+   
+
 5. ## 영화 조회 및 추천 영화 조회
+
+   - 영화 제목으로 검색을 하여 추천 영화 목록을 출력합니다.
+   - requests 라이브러리를 활용하여 TMDB에서 영화제목으로 영화를 검색(Search Movies)합니다.
+   - 응답 받은 결과 중 첫번째 영화의 id 값을 활용하여 TMDB에서 추천 영화 목록(Get Recommendations)을 가져옵니다.
+   - 추천 영화 목록을 리스트로 반환하는 함수를 작성합니다.
+
+   > 결과 예시
+
+   ```json
+   ["조커", "1917", "조조 래빗", "원스 어폰 어 타임 인… 할리우드", "... 생략" ,"펄프픽션"]
+   ```
+
+   > 내가 작성한 코드
+
+   ```python
+   import requests
+   from pprint import pprint
+   
+   
+   def recommendation(title):
+       # 여기에 코드를 작성합니다.  
+       base_url = 'https://api.themoviedb.org/3'
+       path = '/search/movie'
+       params = {
+           'api_key': 'e2be94a1762b4b81af8b205d5e2bcb5f',
+           'language': 'ko-KR',
+           'query': title
+       }
+       response = requests.get(base_url+path, params=params).json()
+       if len(response['results']) < 1:
+           return None
+       mv_id = response['results'][0]['id']
+   
+       base_url_2 = 'https://api.themoviedb.org/3'
+       path_2 = f'/movie/{mv_id}/recommendations'
+       params_2 = {
+           'api_key': 'e2be94a1762b4b81af8b205d5e2bcb5f',
+           'language': 'ko-KR'
+       }
+       response_2 = requests.get(base_url_2+path_2, params=params_2).json()
+       results_2 = response_2['results']
+       title_lst = []
+       for i in range(len(results_2)):
+           title_lst.append(results_2[i]['title'])
+       return title_lst
+   
+   
+   # 아래의 코드는 수정하지 않습니다.
+   if __name__ == '__main__':
+       """
+       제목에 해당하는 영화가 있으면 해당 영화의 id를 기반으로 추천 영화 목록 구성
+       추천 영화가 없을 경우 []를 반환
+       영화 id 검색에 실패할 경우 None을 반환
+       (주의) 추천 영화의 경우 아래 예시 출력과 차이가 있을 수 있음
+       """
+       pprint(recommendation('기생충'))
+       # ['조커', '1917', '조조 래빗', ..생략.., '살인의 추억', '펄프 픽션']
+       pprint(recommendation('그래비티'))
+       # []
+       pprint(recommendation('검색할 수 없는 영화'))
+       # None
+   ```
+
+   > 전공자 작성 코드
+
+   ```python
+   import requests
+   from pprint import pprint
+   from dotenv import load_dotenv
+   import os
+   
+   load_dotenv()
+   API_KEY_TOKEN = os.getenv('my_api_key')
+   
+   def recommendation(title):
+       pass 
+       # 여기에 코드를 작성합니다.
+       BASE_URL = 'https://api.themoviedb.org/3'
+       path = '/search/movie'
+       params = {
+           'api_key': API_KEY_TOKEN,
+           'language': 'ko-KR',
+           'query': title
+       }
+   
+       response = requests.get(BASE_URL+path, params=params).json() 
+       result = response.get('results')
+       
+       # 영화 이름 검색 결과 없을 시, None 반환
+       if result == []:
+           return None
+       
+       # 영화 이름 검색 첫번째 결과의 id 값
+       res_id = result[0].get('id')
+       movie_id = res_id
+       
+       BASE_URL2 = 'https://api.themoviedb.org/3'
+       path2 = f'/movie/{movie_id}/recommendations'
+       params2 = {
+           'api_key': 'f813cc9773fb55369f6d3e1dae17ba81',
+           'language': 'ko-KR',
+           'query': title
+       }
+       
+       response_for_recommend = requests.get(BASE_URL2+path2, params=params2).json()
+       result_for_recommend = response_for_recommend.get('results')
+       
+       titles_for_recommend = []
+       
+       for result in result_for_recommend:
+           titles_for_recommend.append(result.get('title'))
+           
+       if titles_for_recommend == []:
+           return []
+       else:
+           return titles_for_recommend
+        
+   
+   
+   # 아래의 코드는 수정하지 않습니다.
+   if __name__ == '__main__':
+       """
+       제목에 해당하는 영화가 있으면 해당 영화의 id를 기반으로 추천 영화 목록 구성
+       추천 영화가 없을 경우 []를 반환
+       영화 id 검색에 실패할 경우 None을 반환
+       (주의) 추천 영화의 경우 아래 예시 출력과 차이가 있을 수 있음
+       """
+       pprint(recommendation('기생충'))
+       # ['조커', '1917', '조조 래빗', ..생략.., '살인의 추억', '펄프 픽션']
+       pprint(recommendation('그래비티'))
+       # []
+       pprint(recommendation('검색할 수 없는 영화'))
+       # None
+   ```
+
+   > 코드 리뷰
+
+   - 거의 같다! 주소를 불러와서 API를 사용하는 방법 이외에 코드 구현은 크게 복잡하지 않아서 나와 비슷하다.
+
+   
 
 6. ## 출연진 및 연출진 데이터 조회
 
-7. 
+   - 제공된 영화 제목을 검색하여 해당 영화의 출연진(`cast`) 그리고 스태프(`crew`) 중 연출진으로 구성된 목록만을 출력합니다.
+   - requests 라이브러리를 활용하여 TMDB에서 영화제목으로 영화를 검색(Search Movies)합니다.
+   - 응답 받은 결과 중 첫번째 영화의 id 값을 활용하여 TMDB에서 해당 영화에 대한 출연진과 스태프 목록(Get Credits)을 가져옵니다.
+   - 출연진 중 `cast_id` 값이 `10 미만`인 출연진만 추출하고, 연출진은 부서(`department`)가 `Directing` 인 데이터만 추출합니다.
+   - `cast` 와 `directing` 으로 구성된 딕셔너리에 추출된 값을 리스트로 출력하는 함수를 작성합니다.
 
+   > 결과 예시
 
+   ```json
+   {
+       "cast": [
+           "Song Kang-ho",
+           "Lee Sun-kyun",
+           "Cho Yeo-jeong",
+           "Choi Woo-shik",
+           "Park So-dam",
+           "Lee Jung-eun",
+           "Jang Hye-jin"
+       ],
+       "crew": [
+           "Bong Joon-ho",
+           "Park Hyun-cheol",
+           "Han Jin-won",
+           "Kim Seong-sik",
+           "Lee Jung-hoon",
+           "Yoon Young-woo"
+       ]
+   }
+   ```
 
+   > 내가 작성한 코드
 
-
-> 코드 리뷰
-
-- ### env
-
-  - #### `.env`파일이란?
-
-    - git, 오픈소스에 올리면 안되는 값 존재한다. 사용자 API 키 값 같은!
-    - 이때 필요한 것이 **dotenv 패키지** 이며 환경변수 파일을 외부에 만들어 URL,포트, API_KEY등.. 을 저장시켜 소스코드 내에 하드코딩하지 않고 사용 할 수 있다.
-
-  - #### 프로젝트 최상위 루트에 파일 저장
-
-    - 외부 파일(.env)에 환경변수를 정의하여 변수로 받아오는 이유는 보안과 유지보수에 용이하기 때문
-
-  - #### `.env` 파일 사용법
-
-    - .env.{mode명}
-    - .env.--- 파일의 내용을 수정하면 npm 으로 다시 시작해야합니다.
-
-  - #### 파이썬에서 사용하기
-
-    [깃허브 dotenv](https://github.com/theskumar/python-dotenv)
-
-    1. getting started
-
-       ```bash
-       pip install python-dotenv
-       ```
-
-       직접 environment variables 들을 정의 하는 것은 매우 비효율 적이다. 그래서 dotenv를 사용하자.
-
-       ```python
-       from dotenv import load_dotenv
+   ```python
+   import requests
+   from pprint import pprint
+   
+   
+   def credits(title):
+       pass 
+       # 여기에 코드를 작성합니다.  
+       base_url = 'https://api.themoviedb.org/3'
+       path = '/search/movie'
+       params = {
+           'api_key': 'e2be94a1762b4b81af8b205d5e2bcb5f',
+           'language': 'ko-KR',
+           'query': title
+       }
+       response = requests.get(base_url+path, params=params).json()
+       if len(response['results']) < 1:
+           return None
+       mv_id = response['results'][0]['id']
+   
+       base_url_2 = 'https://api.themoviedb.org/3'
+       path_2 = f'/movie/{mv_id}/credits'
+       params_2 = {
+           'api_key': 'e2be94a1762b4b81af8b205d5e2bcb5f',
+           'language': 'ko-KR'
+       }
+       response_2 = requests.get(base_url_2+path_2, params=params_2).json()
+       dic = {}
+       dic['cast'] = []
+       dic['crew'] = []
+       for i in range(len(response_2['cast'])):
+           if response_2['cast'][i]['cast_id'] < 10:
+               dic['cast'].append(response_2['cast'][i]['name'])
+       for i in range(len(response_2['crew'])):
+           if response_2['crew'][i]['department'] == 'Directing':
+               dic['crew'].append(response_2['crew'][i]['name'])
+   
+       return dic
        
-       load_dotenv()  # take environment variables from .env.
+   
+   # 아래의 코드는 수정하지 않습니다.
+   if __name__ == '__main__':
+       """
+       제목에 해당하는 영화가 있으면 해당 영화 id를 통해 영화 상세정보를 검색하여 주연배우 목록(cast)과 스태프(crew) 중 연출진 목록을 반환
+       영화 id 검색에 실패할 경우 None을 반환
+       """
+       pprint(credits('기생충'))
+       # {'cast': ['Song Kang-ho', 'Lee Sun-kyun', ..., 'Jang Hye-jin'], 'crew': ['Bong Joon-ho', 'Park Hyun-cheol', ..., 'Yoon Young-woo']}
+       pprint(credits('검색할 수 없는 영화'))
+       # None
+   ```
+
+   > 전공자 작성 코드
+
+   ```python
+   import requests
+   from pprint import pprint
+   from dotenv import load_dotenv
+   import os
+   
+   load_dotenv()
+   API_KEY_TOKEN = os.getenv('my_api_key')
+   
+   
+   def credits(title):
+       pass 
+       # 여기에 코드를 작성합니다.  
+       BASE_URL = 'https://api.themoviedb.org/3'
+       path = '/search/movie'
+       params = {
+           'api_key': API_KEY_TOKEN,
+           'language': 'ko-KR',
+           'query': title
+       }
        
-       # Code of your application, which uses environment variables (e.g. from `os.environ` or
-       # `os.getenv`) as if they came from the actual environment.
-       ```
+       response = requests.get(BASE_URL+path, params=params).json() 
+       result = response.get('results')
+       
+       # 영화 이름 검색 결과 없을 시, None 반환
+       if result == []:
+           return None
+       
+       # 영화 이름 검색 첫번째 결과의 id 값
+       res_id = result[0].get('id')
+       movie_id = res_id
+       
+           # 여기에 코드를 작성합니다.  
+       BASE_URL2 = 'https://api.themoviedb.org/3'
+       path2 = f'/movie/{movie_id}/credits'
+       params2 = {
+           'api_key': 'f813cc9773fb55369f6d3e1dae17ba81',
+           'language': 'ko-KR',
+           'query': title
+       }
+       
+       response_for_credits = requests.get(BASE_URL2+path2, params=params2).json()
+       
+       cast_list_response = response_for_credits.get('cast')
+       crew_list_response = response_for_credits.get('crew')
+       
+       cast_list = []
+       crew_list = []
+       
+       for c in cast_list_response:
+           if c.get('cast_id') < 10:
+               cast_list.append(c.get('name'))
+               
+       for c in crew_list_response:
+           if c.get('department') == 'Directing':
+               crew_list.append(c.get('name'))
+       
+       return_dict = {}
+       return_dict['cast'] = cast_list
+       return_dict['crew'] = crew_list
+       
+       return return_dict
+       
+       
+   
+   
+   
+   # 아래의 코드는 수정하지 않습니다.
+   if __name__ == '__main__':
+       """
+       제목에 해당하는 영화가 있으면 해당 영화 id를 통해 영화 상세정보를 검색하여 주연배우 목록(cast)과 스태프(crew) 중 연출진 목록을 반환
+       영화 id 검색에 실패할 경우 None을 반환
+       """
+       pprint(credits('기생충'))
+       # {'cast': ['Song Kang-ho', 'Lee Sun-kyun', ..., 'Jang Hye-jin'], 'crew': ['Bong Joon-ho', 'Park Hyun-cheol', ..., 'Yoon Young-woo']}
+       pprint(credits('검색할 수 없는 영화'))
+       # None
+   ```
 
-       위의 명령어를 통해 env파일에서 환경 변수를 가져온다.
+   > 코드 리뷰
 
-- ### npm
+   - 거의 같다! 주소를 불러와서 API를 사용하는 방법 이외에 코드 구현은 크게 복잡하지 않아서 나와 비슷하다.
 
-  - #### `npm`이란?
-
-    - Node Package Manager의 약자
-
-    - node.js에서 사용하는 모듈들을 패키지로 만들어 npm을 통하여 관리하고 배포하고 있다.
-
-      이게 무엇을 의미하냐면 다른 사람이 잘 만들어놓은 모듈들을 npm을 통하여 설치하여 사용이 가능하다는 점이다. 또한 이 모듈이 사용하고있는 다른 모듈의 의존성 또한 자동으로 해결해준다.
-
-      어떻게? **`npm install`** 이 명령어 한번으로!!!
-
-- ### node.js
-
-  - #### node.js란?
-
-    - `Node.js`는 Chrome V8 JavaScript 엔진으로 빌드 된 JavaScript 런타임
-
-    - 즉, 노드를 통해 **다양한 자바스크립트 애플리케이션을 실행**할 수 있으며, 서버를 실행하는 데 제일 많이 사용된다.
-
-      - Node.js는 JavaScript를 **서버**에서도 사용할 수 있도록 만든 프로그램이다.
-      - Node.js는 V8이라는 **JavaScript 엔진 위에서 동작**하는 **자바스크립트 런타임**(환경)이다.
-      - Node.js는 서버사이트 **스크립트 언어가 아니다**. 프로그램(환경)이다.
-      - Node.js는 **웹서버**와 같이 확장성 있는 네트워크 프로그램을 제작하기 위해 만들어졌다.
-
-      Node.js는 확장성이 있는 네트워크 어플리케이션 개발에 사용되는 소프트웨어 플랫폼이다. 특히 **서버사이트에서 많이 사용**되고 있다.
-      사용되는 언어로는 자바스크립트(Javascript)를 활용하며, Non-blocking I/O와 단일 스레드 이벤트 루프를 통한 높은 처리 성능을 가지고 있는 것이 특징이다.
-
-    - **좀 더 쉽게 정리**
-
-      > - Node.js를 사용하려면 먼저 JavaScript를 배워야한다.
-      > - Node.js는 JavaScript를 사용하기 위해 만들어진 것이기 때문이다.
-      > - JavaScript는 C/C++, Java 와 같은 프로그래밍 언어이다.
-      > - 하지만 이름에서 알 수 있듯 JavaScript는 독립적인 언어가 아닌 스크립트 언어이다.
-      > - 스크립트 언어는 특정한 프로그램 안에서 동작하는 프로그램이기 때문에 웹 브라우저 프로그램 안에서만 동작을 한다.
-      > - 즉, 웹 브라우저(크롬, 사파리, 익스플로러, 파이어폭스 등)가 없으면 사용할 수 없는 프로그램이다.
-      > - 여기서 Node.js가 나오는 이유가 된다.
-      > - 즉, JavaScript 를 웹 브라우저에서 독립시킨 것으로 Node.js를 설치하게 되면 터미널프로그램(윈도우의 cmd, 맥의 terminal 등)에서 Node.js를 입력하여 브라우저 없이 바로 실행할 수 있다.
-      > - 하지만 JavaScript에서 분리된 언어이기 때문에 문법은 같다.
-      > - 이렇게 Node.js를 이용하여 웹 브라우저와 무관한 프로그램을 만들 수 있게 되었다.
-      > - 중요한 것은 Node.js를 이용하여 **서버를 만들 수 있다**는 것이다.
-      > - 중요한 이유는 이전까지 Server-Client 웹사이트를 만들 때 웹에서 표시되는 부분은 JavaScript 를 사용하여 만들어야만 했으며, 서버는 Reby, Java 등 다른 언어를 써서 만들었어야 했는데 마침내 **한 가지 언어로 전체 웹 페이지를 만들 수 있게 된 것**이다.
-
-    - **자바스크립트 런타임?**
-
-      > - **런타임**이란 특정 언어로 만든 **프로그램을 실행할 수 있는 환경**을 뜻한다.
-      > - 따라서 노드는 자바스크립트 프로그램을 컴퓨터에서 실행할 수 있게 하는 자바스크립트 실행기이다.
-      > - 특히 2008년 구글이 V8 엔진을 사용하여 크롬을 출시했고 V8 엔진은 다른 자바스크립트 엔진과 달리 매우 빨라 라이언 달(Ryan Dahl)은 2009년 V8 엔진 기반의 **노드 프로젝트**를 시작하며 세상에 나왔다.
-
-    - **이벤트 기반**
-
-      > - 노드는 V8과 더불어 libuv라는 라이브러리를 사용한다.
-      > - libuv 라이브러리는 노드의 특성인 **이벤트 기반, 논 블로킹 I/O 모델**을 구현하고 있다.
-      > - **이벤트 기반(Event-driven)**이란 이벤트가 발생할 때 미리 지정해둔 작업을 수행하는 방식을 의미한다.
-      > - 즉, 이벤트 기반 시스템에서는 특정 이벤트가 발생할 때 무엇을 할지 미리 등록해두고, 이를 이벤트 리스너에 콜백함수를 등록한다.
-      > - 이후 이벤트가 발생하면 리스너에 등록해둔 콜백함수를 호출하며, 이벤트가 끝난 후 노드는 다음 이벤트가 발생할 때까지 대기한다.
-
-    - **이벤트 루프**
-
-      > - 이벤트 루프(event loop)는 여러 이벤트가 동시에 발생했을 때 어떤 순서로 콜백함수를 호출 할지를 이벤트 루프가 판단한다.
-      > - 노드는 이벤트가 종료될 때까지 이벤트 처리를 위한 작업을 반복하므로 루프(loog)라고 부른다.
-
-    - **논 블로킹 I/O**
-
-      > - 이벤트 루프를 잘 활용하면 오래 걸리는 작업을 효율적으로 처리할 수 있다.
-      > - 작업에는 두 가지 종류가 있는데 동시에 실행될 수 있는 작업과 동시에 실행될 수 없는 작업이다.
-      > - 특히 파일 시스템 접근, 네트워크를 통한 요청 작업은 입력(Input)/출력(Output)의 일종이며,
-      > - 이러한 작업을 할 때 노드는 비동기 방식으로 블로킹을 만들지 않게 끔(논 블로킹) 처리한다.
-      > - **비동기**이란 이전 작업이 완료될 때까지 대기하지 않고 동시에 작업을 수행한다.
-      > - 반대로 **동기**는 이전 작업이 끝나야만 다음 작업을 수행한다.
-      > - 자세하게 풀어서 아야기하면 함수 호출 시 당장 실행하는 것이 아니라(동기→블로킹) 일단 어느 곳에 쌓아 놓고 동시에 요청을 처리하고(비동기→논 블로킹) 요청이 완료된 순서대로처리(스택 이용) 한다는 말이다.
-
-    - **싱글 스레드**
-
-      > 이벤트 기반, 논 블로킹 모델과 더불어 노드를 설명하는 키워드 중 하나는 **싱글 스레드**이다.
-      > 자바스크립트 코드는 동시에 실행될 수 없는데 그 이유는 노드가 싱글 스레드 기반이기 때문이다.
-      >
-      > - **프로세스 :** 운영체제에서 할당하는 작업의 단위이다. 노드나 웹 브라우저 같은 프로그램은 개별적인 프로세스이다. 프로세스 간에는 메모리 등의 자원을 공유하지 않는다.
-      > - **스레드 :** 스레드는 프로세스 내에서 실행되는 흐름의 단위이다. 프로세스는 스레드를 여러 개 생성해 여러 작업을 동시에 처리할 수 있다. 스레드들은 부모 프로세스의 자원을 공유한다. 같은 주소의 메모리에 접근 가능하므로 데이터를 공유할 수 있다.
-      >
-      > Node.js는 싱글스레드, 논 블로킹 모델로 싱글 스레드가 혼자서 일을 처리하지만 들어오는 요청 순서가 아닌 논 블로킹 방식으로 이전 작업이 완료될 때까지 대기하지 않고 다음 작업을 수행한다.
-
-    - **결론**
-
-      노드는 기본적으로 싱글 스레드, 논 블로킹 모델을 채용하므로 I/O 요청이 많이 발생하면 노드를 서버로 사용하는 것이 좋다. 하지만 노드는 CPU 부하가 큰 작업에는 적합하지 않다.
-
-      우리가 작성하는 코드는 모두 스레드 하나에서 처리되기 때문에 코드가 CPU 연산을 많이 요구하면 스레드 하나가 혼자서 감당하기 어렵다.
-
-      즉, 개수는 많지만 크기는 작은 데이터를 실시간으로 주고받는데 노드는 적합하다. 예를 들어 네트워트나 데이터베이스, 디스크 작업 같은 I/O에 특화되어있다. 실시간 채팅 애플리케이션, 주식 차트도 포함된다.
-
-      결론적으로 노드의 **`장점`**은 
-
-      1. 멀티 스레드 방식에 비해 **적은 컴퓨터 자원을 사용**한다. 
-
-      2. **I/O 작업이 많은 서버**로 적합하다. 
-
-      3. **웹 서버가 내장**되어 있어 별도의 웹서버를 설치할 필요가 없다. 
-
-      4. 자바스크립트를 사용하기 때문에 **JSON 형식과 쉽게 호환**된다.
-
-
-
-출처
-
----
-
-1. 하나몬 블로그
-
-   ![image-20220724145243252](2022-07-23-review-project-2.assets/image-20220724145243252.png)
-
-> 설명을 잘 해주신다. 앞으로 자주 들릴듯!
+   
