@@ -1569,17 +1569,17 @@ print(num_lst.index(max(num_lst))+1)
 #### 제출
 
 ```python
-a = int(input())
+a = int(input())           # 세 정수 입력
 b = int(input())
 c = int(input())
-dic = {}
-s = a*b*c
+dic = {}                   # 딕셔너리로 키:값 쌍으로 구현
+s = a*b*c                  # s = 세 정수의 곱
 for i in range(10):
-    dic[str(i)]=0
+    dic[str(i)]=0          # 0~9 까지의 키 생성 및 초기값0 입력
 for char in str(s):
-    dic[char] += 1
+    dic[char] += 1         # 세 정수의 곱 결과값에 한자리씩 접근하여 횟수 카운트
 for n in range(10):
-    print(dic[str(n)])
+    print(dic[str(n)])     # 딕셔너리 키가 0~9 순서대로 값 출력 
 ```
 
 
@@ -1757,6 +1757,54 @@ for i in range(n):
         else:
             cnt = 0
     print(sum(score_lst))
+```
+
+
+
+---
+
+
+
+| 단계 | 문제번호 | 제목                                                  |
+| ---- | -------- | ----------------------------------------------------- |
+| 7    | 4344     | [평균은 넘겠지](https://www.acmicpc.net/problem/4344) |
+
+#### 문제
+
+대학생 새내기들의 90%는 자신이 반에서 평균은 넘는다고 생각한다. 당신은 그들에게 슬픈 진실을 알려줘야 한다.
+
+#### 예시 입력
+
+```output
+5
+5 50 50 70 80 100
+7 100 95 90 80 70 60 50
+3 70 90 80
+3 70 90 81
+9 100 99 98 97 96 95 94 93 91
+```
+
+#### 예시 출력
+
+```output
+40.000%
+57.143%
+33.333%
+66.667%
+55.556%
+```
+
+#### 제출
+
+```python
+n = int(input())
+for i in range(n):
+    lst = list(map(int,input().split()))
+    cnt = 0
+    for score in lst[1:]:
+        if score > sum(lst[1:])/lst[0]:   # (sum(lst)-lst[0]) 이렇게 하면 에러!!
+            cnt += 1
+    print(f'{cnt/lst[0]*100:.3f}%')
 ```
 
 
