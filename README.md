@@ -2,7 +2,7 @@
 
 ## ⚒️Tool
 
-[![Markdown-mark.svg](README.assets/Markdown-mark.svg.png)](Git/[22.07.05]_markdown_and_git.md)[![git](README.assets/git.png)![python-logo@2x](README.assets/python-logo@2x.png)](Python)
+[![Markdown-mark.svg](README.assets/Markdown-mark.svg.png)](Git/[22.07.05]_markdown_and_git.md)[![git](README.assets/git.png)![python-logo@2x](README.assets/python-logo@2x.png)](Python)[![algorithm](README.assets/algorithm-16588498147801.png)](Data_Structure)
 
 ## 🌈Date
 
@@ -47,4 +47,6 @@
 > [22.07.24](Python/Study/2022-07-24-node.js.md)
 >
 > [22.07.25](Data_Structure/Study/2022-07-25-basic-of-algorithm.md)
+>
+> [22.07.26](Data_Structure/Study/2022-07-26-time-complexity.md)
 
