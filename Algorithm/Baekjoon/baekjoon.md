@@ -1844,51 +1844,337 @@ def solve(a):
 
 
 
+---
 
 
 
-
-
-
-
-
-## 2단계
-
-| 단계 | 문제번호 | 제목                                                   |
-| ---- | -------- | ------------------------------------------------------ |
-| 1    | 1330     | [두 수 비교하기](https://www.acmicpc.net/problem/1330) |
+| 단계 | 문제번호 | 제목                                         |
+| ---- | -------- | -------------------------------------------- |
+| 3    | 1065     | [한수](https://www.acmicpc.net/problem/1065) |
 
 #### 문제
 
-두 정수 A와 B가 주어졌을 때, A와 B를 비교하는 프로그램을 작성하시오.
+어떤 양의 정수 X의 각 자리가 등차수열을 이룬다면, 그 수를 한수라고 한다. 등차수열은 연속된 두 개의 수의 차이가 일정한 수열을 말한다. N이 주어졌을 때, 1보다 크거나 같고, N보다 작거나 같은 한수의 개수를 출력하는 프로그램을 작성하시오. 
 
 #### 예시 입력
 
-```input
-1 2
+```output
+110
 
-10 2
+1000
 
-5 5
+500
 ```
 
 #### 예시 출력
 
 ```output
-<
+99
 
->
+144
 
-==
+119
 ```
 
 #### 제출
 
 ```python
-a, b = input().split()
-a, b = int(a), int(b)
-print('<'if(a<b)else'>'if(a>b)else'==')
+# 한 수 : 자릿수가 등차수열
+# 등차수열이므로 등차 dif 를 구한다.
+# 등차수열 공식 a + (n-1)*d 를 통해 len(num)=n 까지의 수열을 문자열로 덧붙이기
+# 문자열을 정수로 변환하여 숫자 비교
+# 결국 초기값 a = int(num[0]) 이고 d = map(int, num[i]-num[i+1]), n = len(num)
+# 같으면 한수 카운트 cnt 증가
+
+num_in = input()
+dif = 0                                  # 연속된 두 인덱스 숫자 차이 크기 초기값
+cnt = 0                                  # 한 수 개수 초기값
+
+for num in range(1,int(num_in)+1):             
+    if num < 10 :                       # 한 자릿수는 바로 출력
+        cnt = num
+    else:
+        dif = int(str(num)[1])-int(str(num)[0])           # 등차 크기
+        num_comp = ''                            # 비교 할 숫자 초기값 ''(빈 문자열)                  
+        for n in range(1,len(str(num))+1):            # n은 등차수열 개수로써 num의 자릿수(len(num))이다.
+            num_comp += str(int(str(num)[0]) + (n-1)*dif)  # 문자열에 순서대로 값 추가  (a + (n-1)d )
+        if str(num) == num_comp:
+            cnt += 1                # 등차수열과 같으면 cnt 추가
+
+print(cnt)
 ```
 
 
+
+
+
+
+
+
+
+
+
+## 6단계
+
+| 단계 | 문제번호 | 제목                                                 |
+| ---- | -------- | ---------------------------------------------------- |
+| 1    | 11654    | [아스키 코드](https://www.acmicpc.net/problem/11654) |
+
+#### 문제
+
+알파벳 소문자, 대문자, 숫자 0-9중 하나가 주어졌을 때, 주어진 글자의 아스키 코드값을 출력하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```input
+A
+
+C
+```
+
+#### 예시 출력
+
+```output
+65
+
+67
+```
+
+#### 제출
+
+```python
+n = input()
+print(ord(n))
+```
+
+
+
+---
+
+
+
+| 단계 | 문제번호 | 제목                                               |
+| ---- | -------- | -------------------------------------------------- |
+| 2    | 11720    | [숫자의 합](https://www.acmicpc.net/problem/11720) |
+
+#### 문제
+
+N개의 숫자가 공백 없이 쓰여있다. 이 숫자를 모두 합해서 출력하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```input
+5
+54321
+```
+
+#### 예시 출력
+
+```output
+15
+```
+
+#### 제출
+
+```python
+n = input()
+num = input()
+
+s = 0
+for i in num:
+    s += int(i)
+print(s)
+```
+
+
+
+---
+
+
+
+| 단계 | 문제번호 | 제목                                                 |
+| ---- | -------- | ---------------------------------------------------- |
+| 3    | 10809    | [알파벳 찾기](https://www.acmicpc.net/problem/10809) |
+
+#### 문제
+
+알파벳 소문자로만 이루어진 단어 S가 주어진다. 각각의 알파벳에 대해서, 단어에 포함되어 있는 경우에는 처음 등장하는 위치를, 포함되어 있지 않은 경우에는 -1을 출력하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```input
+baekjoon
+```
+
+#### 예시 출력
+
+```output
+1 0 -1 -1 2 -1 -1 -1 -1 4 3 -1 -1 7 5 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+```
+
+#### 제출
+
+```python
+n = input()
+num = input()
+
+s = 0
+for i in num:
+    s += int(i)
+print(s)
+```
+
+
+
+---
+
+
+
+| 단계 | 문제번호 | 제목                                                |
+| ---- | -------- | --------------------------------------------------- |
+| 4    | 2675     | [문자열 반복](https://www.acmicpc.net/problem/2675) |
+
+#### 문제
+
+문자열 S를 입력받은 후에, 각 문자를 R번 반복해 새 문자열 P를 만든 후 출력하는 프로그램을 작성하시오. 즉, 첫 번째 문자를 R번 반복하고, 두 번째 문자를 R번 반복하는 식으로 P를 만들면 된다. S에는 QR Code "alphanumeric" 문자만 들어있다.
+
+QR Code "alphanumeric" 문자는 `0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ\$%*+-./:` 이다.
+
+#### 예시 입력
+
+```input
+2
+3 ABC
+5 /HTP
+```
+
+#### 예시 출력
+
+```output
+AAABBBCCC
+/////HHHHHTTTTTPPPPP
+```
+
+#### 제출
+
+```python
+n = int(input())
+for i in range(n):
+    rtext = list(input().split())
+    for t in rtext[1]:
+        print(t*int(rtext[0]), end="")
+    print()
+```
+
+
+
+---
+
+
+
+| 단계 | 문제번호 | 제목                                              |
+| ---- | -------- | ------------------------------------------------- |
+| 5    | 1157     | [단어 공부](https://www.acmicpc.net/problem/1157) |
+
+#### 문제
+
+알파벳 대소문자로 된 단어가 주어지면, 이 단어에서 가장 많이 사용된 알파벳이 무엇인지 알아내는 프로그램을 작성하시오. 단, 대문자와 소문자를 구분하지 않는다.
+
+#### 예시 입력
+
+```input
+Mississipi
+
+zZa
+
+baaa
+```
+
+#### 예시 출력
+
+```output
+?
+
+Z
+
+A
+```
+
+#### 제출
+
+```python
+text = input().upper()
+dic={}
+for t in text:
+    if t in dic:
+        dic[t] += 1
+    else:
+        dic[t] = 1
+value=0
+for i in dic:
+    if dic[i] > value:
+        value=dic[i]
+        for k in dic:
+            if dic.get(k) == value:
+                answer=k
+    elif dic[i] == value:
+        answer = '?'
+print(answer)
+```
+
+
+
+---
+
+
+
+| 단계 | 문제번호 | 제목                                                |
+| ---- | -------- | --------------------------------------------------- |
+| 6    | 1152     | [단어의 개수](https://www.acmicpc.net/problem/1152) |
+
+#### 문제
+
+영어 대소문자와 공백으로 이루어진 문자열이 주어진다. 이 문자열에는 몇 개의 단어가 있을까? 이를 구하는 프로그램을 작성하시오. 단, 한 단어가 여러 번 등장하면 등장한 횟수만큼 모두 세어야 한다.
+
+#### 예시 입력
+
+```input
+The Curious Case of Benjamin Button
+
+ The first character is a blank
+ 
+ The last character is a blank 
+```
+
+#### 예시 출력
+
+```output
+6
+
+6
+
+6
+```
+
+#### 제출
+
+```python
+text = input().upper()
+dic={}
+for t in text:
+    if t in dic:
+        dic[t] += 1
+    else:
+        dic[t] = 1
+value=0
+for i in dic:
+    if dic[i] > value:
+        value=dic[i]
+        for k in dic:
+            if dic.get(k) == value:
+                answer=k
+    elif dic[i] == value:
+        answer = '?'
+print(answer)
+```
 
