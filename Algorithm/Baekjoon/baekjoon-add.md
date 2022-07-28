@@ -883,3 +883,539 @@ for i in range(max(len(lst_1),len(lst_2),len(lst_3),len(lst_4),len(lst_5))):
 ```
 
  
+
+---
+
+
+
+| 문제 번호 | 문제 이름               |
+| --------- | ----------------------- |
+| 23825     | SASA 모형을 만들어 보자 |
+
+#### 문제
+
+당신은 SASA 연못에서 알파벳 S 모양의 블록 N$N$개와 알파벳 A 모양의 블록 M$M$개를 건졌다. 태영이는 연못에서 건진 블록을 이용해 학교에 전시할 SASA 모형을 최대한 많이 만들려고 한다.
+
+SASA 모형 1$1$개를 만들기 위해서는, 알파벳 S 모양의 블록 2$2$개와 알파벳 A 모양의 블록 2$2$개가 필요하다. 태영이가 만들 수 있는 SASA 모형 개수의 최댓값을 구하라.
+
+#### 예시 입력
+
+```output
+4 5
+```
+
+#### 예시 출력
+
+```output
+2
+```
+
+#### 제출
+
+```python
+n, m = map(int, input().split())
+print(min(n//2,m//2))
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름 |
+| --------- | --------- |
+| 5622      | 다이얼    |
+
+#### 문제
+
+상근이의 할머니는 아래 그림과 같이 오래된 다이얼 전화기를 사용한다.
+
+![img](https://upload.acmicpc.net/9c88dd24-3a4c-4a09-bc50-e6496958214d/-/preview/)
+
+전화를 걸고 싶은 번호가 있다면, 숫자를 하나를 누른 다음에 금속 핀이 있는 곳 까지 시계방향으로 돌려야 한다. 숫자를 하나 누르면 다이얼이 처음 위치로 돌아가고, 다음 숫자를 누르려면 다이얼을 처음 위치에서 다시 돌려야 한다.
+
+숫자 1을 걸려면 총 2초가 필요하다. 1보다 큰 수를 거는데 걸리는 시간은 이보다 더 걸리며, 한 칸 옆에 있는 숫자를 걸기 위해선 1초씩 더 걸린다.
+
+상근이의 할머니는 전화 번호를 각 숫자에 해당하는 문자로 외운다. 즉, 어떤 단어를 걸 때, 각 알파벳에 해당하는 숫자를 걸면 된다. 예를 들어, UNUCIC는 868242와 같다.
+
+할머니가 외운 단어가 주어졌을 때, 이 전화를 걸기 위해서 필요한 최소 시간을 구하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```output
+WA
+
+UNUCIC
+```
+
+#### 예시 출력
+
+```output
+13
+
+36
+```
+
+#### 제출
+
+```python
+num = input()
+cnt = 0
+alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+for text in num:
+    if alpha.index(text) < 3:
+        cnt += 3
+    elif alpha.index(text) < 6:
+        cnt += 4
+    elif alpha.index(text) < 9:
+        cnt += 5
+    elif alpha.index(text) < 12:
+        cnt += 6
+    elif alpha.index(text) < 15:
+        cnt += 7
+    elif alpha.index(text) < 19:
+        cnt += 8
+    elif alpha.index(text) < 22:
+        cnt += 9
+    elif alpha.index(text) < 26:
+        cnt += 10
+print(cnt)
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름      |
+| --------- | -------------- |
+| 1292      | 쉽게 푸는 문제 |
+
+#### 문제
+
+동호는 내년에 초등학교를 입학한다. 그래서 동호 어머니는 수학 선행 학습을 위해 쉽게 푸는 문제를 동호에게 주었다.
+
+이 문제는 다음과 같다. 1을 한 번, 2를 두 번, 3을 세 번, 이런 식으로 1 2 2 3 3 3 4 4 4 4 5 .. 이러한 수열을 만들고 어느 일정한 구간을 주면 그 구간의 합을 구하는 것이다.
+
+하지만 동호는 현재 더 어려운 문제를 푸느라 바쁘기에 우리가 동호를 도와주자.
+
+#### 예시 입력
+
+```output
+3 7
+```
+
+#### 예시 출력
+
+```output
+15
+```
+
+#### 제출
+
+```python
+a,b = map(int,input().split())
+ 
+arr = [0]
+for i in range(46):
+    for j in range(i):
+        arr.append(i)
+ 
+print(sum(arr[a:b+1]))
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름   |
+| --------- | ----------- |
+| 1357      | 뒤집힌 덧셈 |
+
+#### 문제
+
+어떤 수 X가 주어졌을 때, X의 모든 자리수가 역순이 된 수를 얻을 수 있다. Rev(X)를 X의 모든 자리수를 역순으로 만드는 함수라고 하자. 예를 들어, X=123일 때, Rev(X) = 321이다. 그리고, X=100일 때, Rev(X) = 1이다.
+
+두 양의 정수 X와 Y가 주어졌을 때, Rev(Rev(X) + Rev(Y))를 구하는 프로그램을 작성하시오
+
+#### 예시 입력
+
+```output
+123 100
+
+111 111
+
+5 5
+
+1000 1
+
+456 789
+```
+
+#### 예시 출력
+
+```output
+223
+
+222
+
+1
+
+2
+
+1461
+```
+
+#### 제출
+
+```python
+x, y = input().split()
+s = int(x[::-1].lstrip('0')) + int(y[::-1].lstrip('0'))
+print(str(s)[::-1].lstrip('0'))
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름   |
+| --------- | ----------- |
+| 10816     | 숫자 카드 2 |
+
+#### 문제
+
+숫자 카드는 정수 하나가 적혀져 있는 카드이다. 상근이는 숫자 카드 N개를 가지고 있다. 정수 M개가 주어졌을 때, 이 수가 적혀있는 숫자 카드를 상근이가 몇 개 가지고 있는지 구하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```output
+10
+6 3 2 10 10 10 -10 -10 7 3
+8
+10 9 -5 2 3 4 5 -10
+```
+
+#### 예시 출력
+
+```output
+3 0 0 1 2 0 0 2
+```
+
+#### 제출
+
+```python
+# 상근이 카드 리스트 입력
+# 수자 딕셔너리 입력
+# 하나씩 비교하여 카운트
+
+n = int(input())
+card_lst = list(map(int,input().split()))
+m = int(input())
+num_dic = list(map(int,input().split()))
+
+for n in num_dic:
+    print(card_lst.count(n), end=' ')
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름 |
+| --------- | --------- |
+| 7785      |           |
+
+#### 문제
+
+상근이는 세계적인 소프트웨어 회사 기글에서 일한다. 이 회사의 가장 큰 특징은 자유로운 출퇴근 시간이다. 따라서, 직원들은 반드시 9시부터 6시까지 회사에 있지 않아도 된다.
+
+각 직원은 자기가 원할 때 출근할 수 있고, 아무때나 퇴근할 수 있다.
+
+상근이는 모든 사람의 출입카드 시스템의 로그를 가지고 있다. 이 로그는 어떤 사람이 회사에 들어왔는지, 나갔는지가 기록되어져 있다. 로그가 주어졌을 때, 현재 회사에 있는 모든 사람을 구하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```output
+4
+Baha enter
+Askar enter
+Baha leave
+Artem enter
+```
+
+#### 예시 출력
+
+```output
+Askar
+Artem
+```
+
+#### 제출
+
+```python
+# 사람 이름을 받음, 상태를 받음
+# leave는 -1 enter = +1 로 하고 1이상이면 안에 있다.
+# 이름 리스트, 상태 리스트 각각 만들고 인덱스로 접근하여 통합
+# for 상태가 1이상이면 인덱스 반환하여 그 사람의 이름 리스트에 따로 추가
+# sorted하여 프린트
+
+from unicodedata import name
+
+
+t = int(input())
+name_dic = dict()
+ent_lst = []
+for i in range(t):
+    k, v = input().split()
+    name_dic[k] = v
+for key in name_dic:
+    if name_dic[key] == 'enter':
+        ent_lst.append(key)
+ent_lst.sort(reverse=True)
+for people in ent_lst:
+    print(people)
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름  |
+| --------- | ---------- |
+| 1302      | 베스트셀러 |
+
+#### 문제
+
+김형택은 탑문고의 직원이다. 김형택은 계산대에서 계산을 하는 직원이다. 김형택은 그날 근무가 끝난 후에, 오늘 판매한 책의 제목을 보면서 가장 많이 팔린 책의 제목을 칠판에 써놓는 일도 같이 하고 있다.
+
+오늘 하루 동안 팔린 책의 제목이 입력으로 들어왔을 때, 가장 많이 팔린 책의 제목을 출력하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```output
+5
+top
+top
+top
+top
+kimtop
+
+9
+table
+chair
+table
+table
+lamp
+door
+lamp
+table
+chair
+
+6
+a
+a
+a
+b
+b
+b
+
+8
+icecream
+peanuts
+peanuts
+chocolate
+candy
+chocolate
+icecream
+apple
+
+1
+soul
+```
+
+#### 예시 출력
+
+```output
+top
+
+table
+
+a
+
+chocolate
+
+soul
+```
+
+#### 제출
+
+```python
+# 가장 많이 팔린 책
+# 중복되면 사전상 가장 앞에 이름
+# 최빈값? .mode
+# 딕셔너리로 이름, 횟수 저장하고 값이 더 큰 경우에만 best 변수에 키 이름 저장
+
+n = int(input())
+sell_dic = dict()
+for i in range(n):
+    book = input()
+    if book in sell_dic:
+        sell_dic[book] += 1
+    else:
+        sell_dic[book] = 1
+cnt = 0
+best_lst = []
+for key in sell_dic:
+    if sell_dic[key] > cnt:
+        best = key
+        cnt = sell_dic[key]
+for key in sell_dic:
+    if sell_dic[key] == cnt:
+        best_lst.append(key)
+print(sorted(best_lst)[0])
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름 |
+| --------- | --------- |
+| 1764      | 듣보잡    |
+
+#### 문제
+
+김진영이 듣도 못한 사람의 명단과, 보도 못한 사람의 명단이 주어질 때, 듣도 보도 못한 사람의 명단을 구하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```output
+3 4
+ohhenrie
+charlie
+baesangwook
+obama
+baesangwook
+ohhenrie
+clinton
+```
+
+#### 예시 출력
+
+```output
+2
+baesangwook
+ohhenrie
+```
+
+#### 제출
+
+```python
+# 듣지 못한 사람 리스트 
+# 보도 못한 사람 리스트
+# 듣도 보도 못한 사람 리스트
+
+
+
+h,s = map(int,input().split())
+
+hear_lst = []
+saw_lst = []
+answer = []
+
+for i in range(h):
+    hear_lst.append(input())
+for i in range(s):
+    saw_lst.append(input())
+for hear in hear_lst:
+    if hear in saw_lst:
+        answer.append(hear)
+print(len(answer))
+answer.sort()
+for people in answer:
+    print(people)
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름 |
+| --------- | --------- |
+| 11652     | 카드      |
+
+#### 문제
+
+준규는 숫자 카드 N장을 가지고 있다. 숫자 카드에는 정수가 하나 적혀있는데, 적혀있는 수는 -262보다 크거나 같고, 262보다 작거나 같다.
+
+준규가 가지고 있는 카드가 주어졌을 때, 가장 많이 가지고 있는 정수를 구하는 프로그램을 작성하시오. 만약, 가장 많이 가지고 있는 정수가 여러 가지라면, 작은 것을 출력한다.
+
+#### 예시 입력
+
+```output
+5
+1
+2
+1
+2
+1
+
+6
+1
+2
+1
+2
+1
+2
+```
+
+#### 예시 출력
+
+```output
+1
+
+1
+```
+
+#### 제출
+
+```python
+# 가장 많이 팔린 책
+# 책 문제와 같은 유형 이름만 바꾸어 준다
+
+
+n = int(input())
+card_dic = dict()
+for i in range(n):
+    card_num = input()
+    if card_num in card_dic:
+        card_dic[card_num] += 1
+    else:
+        card_dic[card_num] = 1
+cnt = 0
+most_lst = []
+for key in card_dic:
+    if card_dic[key] > cnt:
+        best = key
+        cnt = card_dic[key]
+for key in card_dic:
+    if card_dic[key] == cnt:
+        most_lst.append(key)
+print(sorted(most_lst)[0])
+```
+
+ 

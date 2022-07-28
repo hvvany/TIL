@@ -51,4 +51,6 @@
 > [22.07.26](Data_Structure/Study/2022-07-26-time-complexity.md)
 >
 > [22.07.27](Data_Structure/Study/2022-07-27-string.md)
+>
+> [22.07.28](Data_Structure/Study/2022-07-28-dict.md)
 
