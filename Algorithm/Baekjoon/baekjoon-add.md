@@ -1323,29 +1323,19 @@ ohhenrie
 #### 제출
 
 ```python
-# 듣지 못한 사람 리스트 
-# 보도 못한 사람 리스트
-# 듣도 보도 못한 사람 리스트
-
-
-
+# set으로 풀어보자
 h,s = map(int,input().split())
 
-hear_lst = []
-saw_lst = []
-answer = []
+hear = set()
+saw = set()
 
 for i in range(h):
-    hear_lst.append(input())
+    hear.add(input())
 for i in range(s):
-    saw_lst.append(input())
-for hear in hear_lst:
-    if hear in saw_lst:
-        answer.append(hear)
-print(len(answer))
-answer.sort()
-for people in answer:
-    print(people)
+    saw.add(input())
+hns = hear&saw
+hns = sorted(hns) 
+print(len(hns), *hns, sep='\n')
 ```
 
  
@@ -1394,8 +1384,8 @@ for people in answer:
 #### 제출
 
 ```python
-# 가장 많이 팔린 책
-# 책 문제와 같은 유형 이름만 바꾸어 준다
+# # 가장 많이 팔린 책
+# # 책 문제와 같은 유형 이름만 바꾸어 준다
 
 
 n = int(input())
@@ -1406,16 +1396,14 @@ for i in range(n):
         card_dic[card_num] += 1
     else:
         card_dic[card_num] = 1
-cnt = 0
-most_lst = []
-for key in card_dic:
-    if card_dic[key] > cnt:
-        best = key
-        cnt = card_dic[key]
-for key in card_dic:
-    if card_dic[key] == cnt:
-        most_lst.append(key)
-print(sorted(most_lst)[0])
+
+num_lst = []
+v_max = max(card_dic.values())
+for k in card_dic:
+    if card_dic[k] == v_max:
+        num_lst.append(int(k))
+
+print(min(num_lst))
 ```
 
  
