@@ -36,23 +36,26 @@ t = int(input())                                     # 케이스 개수
 for i in range(t):                                   # 케이스 반복
     k = int(input())                                 # 케이스 내부 가격 개수
     cost_lst = list(map(int,input().split()))        # 가격 리스트
-    cost_sum = 0                                     # 가격 이득 초기값
-    idx1 = -1                                        # 인덱스 접근 위해 초기값
-    while True:
-        if idx1 == k-1:                                # 최신화된 이전 인덱스가 마지막 인덱스 일때
-            break                                      # 제일 끝에가 큰 수이므로
-        print(max(cost_lst[idx1+1:]))
-        cnt = -1
-        for l in cost_lst[::-1]:
-            if l == max(cost_lst[idx1+1:]):
-                idx2 = cnt
-            else:
-                cnt -= 1
-        print(cost_lst)
-        for cst in cost_lst[idx1+1:idx2]:
-            if cost_lst[idx2] - cst > 0:
-                cost_sum += cost_lst[idx2]-cst 
-        if cost_lst[idx2] == min(cost_lst):
-            break
-        idx1 = idx2
-    print(f'#{i+1} {cost_sum}')
+    idx_storage = []
+    price = 0
+    cnt = 0
+    for idx in range(k):
+        if cost_lst[idx] < price:
+            cnt += 1
+            if cnt == 1:
+                idx_storage.append(idx-1)
+        elif idx == k-1:
+            idx_storage.append(idx)
+        else:
+            cnt = 0
+    first_idx = 0
+    s = 0
+    for idx in idx_storage:
+        for cost in cost_lst[first_idx:idx]:
+            s += cost_lst[idx]-cost
+            first_idx = idx
+    print(s)
+
+
+
+
