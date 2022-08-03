@@ -1568,3 +1568,917 @@ for _ in range(n):
 ```
 
  
+
+---
+
+
+
+| 문제 번호 | 문제 이름         |
+| --------- | ----------------- |
+| 2902      | KMP는 왜 KMP일까? |
+
+#### 문제
+
+KMP 알고리즘이 KMP인 이유는 이를 만든 사람의 성이 Knuth, Morris, Prett이기 때문이다. 이렇게 알고리즘에는 발견한 사람의 성을 따서 이름을 붙이는 경우가 많다.
+
+또 다른 예로, 유명한 비대칭 암호화 알고리즘 RSA는 이를 만든 사람의 이름이 Rivest, Shamir, Adleman이다.
+
+사람들은 이렇게 사람 성이 들어간 알고리즘을 두 가지 형태로 부른다.
+
+- 첫 번째는 성을 모두 쓰고, 이를 하이픈(-)으로 이어 붙인 것이다. 예를 들면, Knuth-Morris-Pratt이다. 이것을 긴 형태라고 부른다.
+- 두 번째로 짧은 형태는 만든 사람의 성의 첫 글자만 따서 부르는 것이다. 예를 들면, KMP이다.
+
+동혁이는 매일매일 자신이 한 일을 모두 메모장에 적어놓는다. 잠을 자기 전에, 오늘 하루 무엇을 했는지 되새겨 보는 것으로 하루를 마감한다.
+
+하루는 이 메모를 보던 중, 지금까지 긴 형태와 짧은 형태를 섞어서 적어 놓은 것을 발견했다.
+
+이렇게 긴 형태로 하루 일을 기록하다가는 메모장 가격이 부담되어 파산될 것이 뻔하기 때문에, 앞으로는 짧은 형태로 기록하려고 한다.
+
+긴 형태의 알고리즘 이름이 주어졌을 때, 이를 짧은 형태로 바꾸어 출력하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```output
+Knuth-Morris-Pratt
+
+Mirko-Slavko
+
+Pasko-Patak
+```
+
+#### 예시 출력
+
+```output
+KMP
+
+MS
+
+PP
+```
+
+#### 제출
+
+```python
+text_lst = list(map(str,input().split('-')))
+
+for i in range(len(text_lst)):
+    print(text_lst[i][0],end='')
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름 |
+| --------- | --------- |
+| 14720     | 우유 축제 |
+
+#### 문제
+
+영학이는 딸기우유, 초코우유, 바나나우유를 좋아한다.
+
+입맛이 매우 까다로운 영학이는 자신만의 우유를 마시는 규칙이 있다.
+
+1. 맨 처음에는 딸기우유를 한 팩 마신다.
+2. 딸기우유를 한 팩 마신 후에는 초코우유를 한 팩 마신다.
+3. 초코우유를 한 팩 마신 후에는 바나나우유를 한 팩 마신다.
+4. 바나나우유를 한 팩 마신 후에는 딸기우유를 한 팩 마신다. 
+
+영학이는 우유 축제가 열리고 있는 우유거리에 왔다. 우유 거리에는 우유 가게들이 일렬로 늘어서 있다.
+
+영학이는 우유 거리의 시작부터 끝까지 걸으면서 우유를 사먹고자 한다.
+
+각각의 우유 가게는 딸기, 초코, 바나나 중 한 종류의 우유만을 취급한다.
+
+각각의 우유 가게 앞에서, 영학이는 우유를 사마시거나, 사마시지 않는다.
+
+우유거리에는 사람이 많기 때문에 한 번 지나친 우유 가게에는 다시 갈 수 없다.
+
+영학이가 마실 수 있는 우유의 최대 개수를 구하여라.
+
+#### 예시 입력
+
+```output
+7
+0 1 2 0 1 2 0
+```
+
+#### 예시 출력
+
+```output
+7
+```
+
+#### 제출
+
+```python
+from collections import deque
+
+n = int(input())
+store = list(map(str,input().split()))
+milk = deque(map(str,range(3)))
+cnt = 0
+for idx in range(n):
+    if store[idx] == milk[0]:
+        cnt += 1
+        milk.append(milk.popleft())
+print(cnt)
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름 |
+| --------- | --------- |
+| 1076      | 저항      |
+
+#### 문제
+
+전자 제품에는 저항이 들어간다. 저항은 색 3개를 이용해서 그 저항이 몇 옴인지 나타낸다. 처음 색 2개는 저항의 값이고, 마지막 색은 곱해야 하는 값이다. 저항의 값은 다음 표를 이용해서 구한다.
+
+| 색     | 값   | 곱            |
+| :----- | :--- | :------------ |
+| black  | 0    | 1             |
+| brown  | 1    | 10            |
+| red    | 2    | 100           |
+| orange | 3    | 1,000         |
+| yellow | 4    | 10,000        |
+| green  | 5    | 100,000       |
+| blue   | 6    | 1,000,000     |
+| violet | 7    | 10,000,000    |
+| grey   | 8    | 100,000,000   |
+| white  | 9    | 1,000,000,000 |
+
+예를 들어, 저항의 색이 yellow, violet, red였다면 저항의 값은 4,700이 된다.
+
+#### 예시 입력
+
+```output
+yellow
+violet
+red
+
+orange
+red
+blue
+
+white
+white
+white
+```
+
+#### 예시 출력
+
+```output
+4700
+
+32000000
+
+99000000000
+```
+
+#### 제출
+
+```python
+color = ['black','brown','red','orange','yellow','green','blue','violet','grey','white']
+c_1 = input()
+c_2 = input()
+c_3 = input()
+
+for idx in range(10):
+    if color[idx] == c_1:
+        n_1 = idx
+    if color[idx] == c_2:
+        n_2 = idx
+    if color[idx] == c_3:
+        n_3 = 10**idx
+ohm = int(str(n_1)+str(n_2))*n_3
+print(ohm)
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름       |
+| --------- | --------------- |
+| 20001     | 고무오리 디버깅 |
+
+#### 문제
+
+백준 문제 풀이에 힘들어하는 수진이를 위해 민우는 문제해결에 도움이 되는 고무오리를 준비했다. 민우가 준비한 고무오리는 신비한 능력이 존재하는데, 최근에 풀던 백준 문제를 해결해주는 능력이다. 신비한 고무오리와 함께 수진이의 백준 풀이를 도와주자!
+
+고무오리의 사용법은 다음과 같다.
+
+- "고무오리 디버깅 시작" 이라고 외친다
+- 문제들을 풀기 시작한다
+- 고무오리를 받으면 최근 풀던 문제를 해결한다
+- "고무오리 디버깅 끝" 이라고 외치면 문제풀이를 종료한다.
+
+하지만 고무오리에는 치명적인 문제가 있는데, 풀 문제가 없는데 사용한다면 고무오리는 벌칙으 로 두 문제를 추가한다는 점이다.
+
+#### 예시 입력
+
+```output
+고무오리 디버깅 시작
+문제
+고무오리
+문제
+문제
+고무오리
+고무오리
+고무오리 디버깅 끝
+
+고무오리 디버깅 시작
+고무오리
+고무오리
+고무오리
+고무오리 디버깅 끝
+
+고무오리 디버깅 시작
+문제
+문제
+고무오리
+고무오리
+고무오리
+문제
+고무오리
+문제
+고무오리
+고무오리
+고무오리
+고무오리 디버깅 끝
+
+고무오리 디버깅 시작
+고무오리
+고무오리 디버깅 끝
+```
+
+#### 예시 출력
+
+```output
+고무오리야 사랑해
+
+고무오리야 사랑해
+
+고무오리야 사랑해
+
+힝구
+```
+
+#### 제출
+
+```python
+start = input()
+s = 0
+while True:
+    text = input()
+    if text == '고무오리 디버깅 끝':
+        break
+    if text == '문제':
+        s += 1
+    elif text == '고무오리':
+        s -= 1
+    if s == -1:
+        s = 2
+if s == 0:
+    print('고무오리야 사랑해')
+else:
+    print('힝구')
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름       |
+| --------- | --------------- |
+| 10546     | 배부른 마라토너 |
+
+#### 문제
+
+마라토너라면 국적과 나이를 불문하고 누구나 참가하고 싶어하는 백준 마라톤 대회가 열린다. 42.195km를 달리는 이 마라톤은 모두가 참가하고 싶어했던 만큼 매년 모두가 완주해왔다. 단, 한 명만 빼고! 
+
+모두가 참가하고 싶어서 안달인데 이런 백준 마라톤 대회에 참가해 놓고 완주하지 못한 배부른 참가자 한 명은 누굴까?
+
+#### 예시 입력
+
+```output
+3
+leo
+kiki
+eden
+eden
+kiki
+
+5
+marina
+josipa
+nikola
+vinko
+filipa
+josipa
+filipa
+marina
+nikola
+
+4
+mislav
+stanko
+mislav
+ana
+stanko
+ana
+mislav
+```
+
+#### 예시 출력
+
+```output
+leo
+
+vinko
+
+mislav
+```
+
+#### 제출
+
+```python
+import sys
+input = sys.stdin.readline
+
+names = dict()
+n = int(input())
+for _ in range(n):
+    name = input()
+    if name in names:
+        names[name] += 1
+    else:
+        names[name] = 1
+
+for _ in range(n-1):
+    name = input()
+    names[name] -= 1
+
+for key in names:
+    if names[key] > 0:
+        print(key)
+        
+# from collections import deque
+# import sys
+# input = sys.stdin.readline
+
+# names = deque()
+# finish = []
+# n = int(input())
+# for _ in range(n):
+#     names.append(input())
+# for _ in range(n-1):
+#     finish.append(input())
+# while len(names) > 1:
+#     if names[0] == finish[-1]:
+#         names.popleft()
+#         finish.pop()
+#     else:
+#         names.append(names.popleft())
+# print(*names)
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름   |
+| --------- | ----------- |
+| 1269      | 대칭 차집합 |
+
+#### 문제
+
+자연수를 원소로 갖는 공집합이 아닌 두 집합 A와 B가 있다. 이때, 두 집합의 대칭 차집합의 원소의 개수를 출력하는 프로그램을 작성하시오. 두 집합 A와 B가 있을 때, (A-B)와 (B-A)의 합집합을 A와 B의 대칭 차집합이라고 한다.
+
+예를 들어, A = { 1, 2, 4 } 이고, B = { 2, 3, 4, 5, 6 } 라고 할 때, A-B = { 1 } 이고, B-A = { 3, 5, 6 } 이므로, 대칭 차집합의 원소의 개수는 1 + 3 = 4개이다.
+
+#### 예시 입력
+
+```output
+3 5
+1 2 4
+2 3 4 5 6
+```
+
+#### 예시 출력
+
+```output
+4
+```
+
+#### 제출
+
+```python
+a, b = map(int,input().split())
+
+
+a_lst = set(map(int,input().split()))
+b_lst = set(map(int,input().split()))
+
+print(len(a_lst ^ b_lst))
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름 |
+| --------- | --------- |
+| 11286     | 절댓값 힙 |
+
+#### 문제
+
+절댓값 힙은 다음과 같은 연산을 지원하는 자료구조이다.
+
+1. 배열에 정수 x (x ≠ 0)를 넣는다.
+2. 배열에서 절댓값이 가장 작은 값을 출력하고, 그 값을 배열에서 제거한다. 절댓값이 가장 작은 값이 여러개일 때는, 가장 작은 수를 출력하고, 그 값을 배열에서 제거한다.
+
+프로그램은 처음에 비어있는 배열에서 시작하게 된다.
+
+#### 예시 입력
+
+```output
+18
+1
+-1
+0
+0
+0
+1
+1
+-1
+-1
+2
+-2
+0
+0
+0
+0
+0
+0
+0
+```
+
+#### 예시 출력
+
+```output
+-1
+1
+0
+-1
+-1
+1
+1
+-2
+2
+0
+```
+
+#### 제출
+
+```python
+import sys
+input = sys.stdin.readline
+# sys.stdin = open('11286.txt')
+import heapq
+
+heap = []
+
+n = int(input())
+for _ in range(n):
+    num = int(input())
+    if num < 0:
+        heapq.heappush(heap,[abs(num),-1])
+    elif num > 0:
+        heapq.heappush(heap,[abs(num),1])
+    elif num == 0:
+        if len(heap) == 0:
+            print(0)
+        else:
+            number = heapq.heappop(heap)
+            print(number[0]*number[1])
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름 |
+| --------- | --------- |
+| 5063      | TGN       |
+
+#### 문제
+
+상근이는 TGN사의 사장이다. TGN은 Teenager Game Network의 약자 같지만, 사실 Temporary Group Name의 약자이다.
+
+이 회사는 청소년을 위한 앱을 만드는 회사이다. 일년에 걸친 개발기간 끝에 드디어 앱을 완성했고, 이제 팔기만 하면 된다.
+
+상근이는 데이트를 인간의 두뇌로 이해할 수 없을 정도로 많이 한다. 따라서 엄청난 데이트 비용이 필요하다. 상근이는 광고를 적절히 해서 수익을 최대한 올리려고 한다.
+
+어느 날 하늘을 바라보던 상근이는 시리우스의 기운을 받게 되었고, 광고 효과를 예측하는 능력을 갖게 되었다.
+
+광고 효과가 주어졌을 때, 광고를 해야할지 말아야할지 결정하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```output
+3
+0 100 70
+100 130 30
+-100 -70 40
+```
+
+#### 예시 출력
+
+```output
+advertise
+does not matter
+do not advertise
+```
+
+#### 제출
+
+```python
+n = int(input())
+
+for _ in range(n):
+    r, e, c = map(int,input().split())
+    if r > e-c:
+        print('do not advertise')
+    elif r == e-c:
+        print('does not matter')
+    else:
+        print('advertise')
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름   |
+| --------- | ----------- |
+| 2750      | 수 정렬하기 |
+
+#### 문제
+
+N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```output
+5
+5
+2
+3
+4
+1
+```
+
+#### 예시 출력
+
+```output
+1
+2
+3
+4
+5
+```
+
+#### 제출
+
+```python
+import heapq
+
+n = int(input())
+
+heap = []
+for _ in range(n):
+    num = int(input())
+    heapq.heappush(heap,num)
+for _ in range(n):
+    print(heapq.heappop(heap))
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름     |
+| --------- | ------------- |
+| 4949      | 균형잡힌 세상 |
+
+#### 문제
+
+세계는 균형이 잘 잡혀있어야 한다. 양과 음, 빛과 어둠 그리고 왼쪽 괄호와 오른쪽 괄호처럼 말이다.
+
+정민이의 임무는 어떤 문자열이 주어졌을 때, 괄호들의 균형이 잘 맞춰져 있는지 판단하는 프로그램을 짜는 것이다.
+
+문자열에 포함되는 괄호는 소괄호("()") 와 대괄호("[]")로 2종류이고, 문자열이 균형을 이루는 조건은 아래와 같다.
+
+- 모든 왼쪽 소괄호("(")는 오른쪽 소괄호(")")와만 짝을 이뤄야 한다.
+- 모든 왼쪽 대괄호("[")는 오른쪽 대괄호("]")와만 짝을 이뤄야 한다.
+- 모든 오른쪽 괄호들은 자신과 짝을 이룰 수 있는 왼쪽 괄호가 존재한다.
+- 모든 괄호들의 짝은 1:1 매칭만 가능하다. 즉, 괄호 하나가 둘 이상의 괄호와 짝지어지지 않는다.
+- 짝을 이루는 두 괄호가 있을 때, 그 사이에 있는 문자열도 균형이 잡혀야 한다.
+
+정민이를 도와 문자열이 주어졌을 때 균형잡힌 문자열인지 아닌지를 판단해보자.
+
+#### 예시 입력
+
+```output
+So when I die (the [first] I will see in (heaven) is a score list).
+[ first in ] ( first out ).
+Half Moon tonight (At least it is better than no Moon at all].
+A rope may form )( a trail in a maze.
+Help( I[m being held prisoner in a fortune cookie factory)].
+([ (([( [ ] ) ( ) (( ))] )) ]).
+ .
+.
+```
+
+#### 예시 출력
+
+```output
+yes
+yes
+no
+no
+no
+yes
+yes
+```
+
+#### 제출
+
+```python
+# while True:
+#     big, small = 0, 0
+#     text_line = input()
+#     answer = 'no'
+#     if text_line == '.':
+#         break
+#     for text in text_line:
+#         print(text)
+#         if text == '(':
+#             small += 1
+#         elif text == ')':
+#             small -= 1
+#         elif text == '[':
+#             big += 1
+#         elif text == ']':
+#             big -= 1
+#         if small < 0 or big < 0:
+#             break
+#     if small == 0 and big == 0:
+#         answer = 'yes'
+#     print(answer)
+#     break
+
+while True:
+    gual = []
+    text_line = input()
+    if text_line == '.':
+        break
+    for text in text_line:
+        if text in '()[]':
+            gual.append(text)
+    string = ''.join(gual)
+    while '()' in string or '[]' in string:
+        string = ''.join(gual)
+        if '()' in string:
+            idx = string.index('()')
+            gual.pop(idx)
+            gual.pop(idx)
+            string = ''.join(gual)
+        if '[]' in string:
+            idx = string.index('[]')
+            gual.pop(idx)
+            gual.pop(idx)
+    if len(gual) != 0:
+        print('no')
+    else:
+        print('yes')
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름 |
+| --------- | --------- |
+| 2776      | 암기왕    |
+
+#### 문제
+
+연종이는 엄청난 기억력을 가지고 있다. 그래서 하루 동안 본 정수들을 모두 기억 할 수 있다. 하지만 이를 믿을 수 없는 동규는 그의 기억력을 시험해 보기로 한다. 동규는 연종을 따라 다니며, 연종이 하루 동안 본 정수들을 모두 ‘수첩1’에 적어 놓았다. 그것을 바탕으로 그가 진짜 암기왕인지 알아보기 위해, 동규는 연종에게 M개의 질문을 던졌다. 질문의 내용은 “X라는 정수를 오늘 본 적이 있는가?” 이다. 연종은 막힘없이 모두 대답을 했고, 동규는 연종이 봤다고 주장하는 수 들을 ‘수첩2’에 적어 두었다. 집에 돌아온 동규는 답이 맞는지 확인하려 하지만, 연종을 따라다니느라 너무 힘들어서 여러분에게 도움을 요청했다. 동규를 도와주기 위해 ‘수첩2’에 적혀있는 순서대로, 각각의 수에 대하여, ‘수첩1’에 있으면 1을, 없으면 0을 출력하는 프로그램을 작성해보자.
+
+#### 예시 입력
+
+```output
+1
+5
+4 1 5 2 3
+5
+1 3 7 9 5
+```
+
+#### 예시 출력
+
+```output
+1
+1
+0
+0
+1
+```
+
+#### 제출
+
+```python
+n = int(input())
+for _ in range(n):
+    a = int(input())
+    a_set = set(map(int,input().split()))
+    b = int(input())
+    b_lst = list(map(int,input().split()))
+
+    for num in b_lst:
+        if num in a_set:
+            print(1)
+        else:
+            print(0)
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름          |
+| --------- | ------------------ |
+| 25192     | 인사성 밝은 곰곰이 |
+
+#### 문제
+
+알고리즘 입문방 오픈 채팅방에서는 새로운 분들이 입장을 할 때마다 곰곰티콘을 사용해 인사를 한다. 이를 본 문자열 킬러 임스는 채팅방의 기록을 수집해 그 중 곰곰티콘이 사용된 횟수를 구해 보기로 했다.
+
+`ENTER`는 새로운 사람이 채팅방에 입장했음을 나타낸다. 그 외는 채팅을 입력한 유저의 닉네임을 나타낸다. 닉네임은 숫자 또는 영문 대소문자로 구성되어 있다.
+
+새로운 사람이 입장한 이후 처음 채팅을 입력하는 사람은 반드시 곰곰티콘으로 인사를 한다. 그 외의 기록은 곰곰티콘을 쓰지 않은 평범한 채팅 기록이다.
+
+채팅 기록 중 곰곰티콘이 사용된 횟수를 구해보자!
+
+#### 예시 입력
+
+```output
+9
+ENTER
+pjshwa
+chansol
+chogahui05
+lms0806
+pichulia
+r4pidstart
+swoon
+tony9402
+
+7
+ENTER
+pjshwa
+chansol
+chogahui05
+ENTER
+pjshwa
+chansol
+
+3
+ENTER
+lms0806
+lms0806
+```
+
+#### 예시 출력
+
+```output
+8
+
+5
+
+1
+```
+
+#### 제출
+
+```python
+n = int(input())
+
+gom_set = set()
+cnt_lst = []
+
+for _ in range(n):
+    text = input()
+    if text == 'ENTER':
+        cnt_lst.append(len(gom_set))
+        gom_set = set()
+    else:
+        gom_set.add(text)
+cnt_lst.append(len(gom_set))
+
+print(sum(cnt_lst))
+```
+
+ 
+
+---
+
+
+
+| 문제 번호 | 문제 이름    |
+| --------- | ------------ |
+| 10989     | 수 정렬하기3 |
+
+#### 문제
+
+N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```output
+10
+5
+2
+3
+1
+4
+2
+3
+5
+1
+7
+```
+
+#### 예시 출력
+
+```output
+1
+1
+2
+2
+3
+3
+4
+5
+5
+7
+```
+
+#### 제출
+
+```python
+import sys
+input = sys.stdin.readline
+N = int(input())
+
+check_list = [0] * 10001
+
+for i in range(N):
+    input_num = int(input())
+    
+    check_list[input_num] = check_list[input_num] + 1
+    
+for i in range(10001):
+    if check_list[i] != 0:
+        for j in range(check_list[i]):
+            print(i)
+```
+
+ 
