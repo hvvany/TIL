@@ -18,7 +18,6 @@ for order in order_matrix:
         if direc == 0:
             gam_matrix[col-1].append(gam_matrix[col-1].pop(0))
         else:
-
             gam_matrix[col-1].insert(0,gam_matrix[col-1].pop())
 # pprint(gam_matrix)
 # 모래시계...? 아하 홀수!

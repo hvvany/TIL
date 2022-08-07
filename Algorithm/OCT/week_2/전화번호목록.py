@@ -1,3 +1,16 @@
+import time
+phone_lst = []
+phone_number = ''
+for number in range(1000):
+    if len(phone_lst) == 10000:
+        break
+    phone_number += str(number)
+    phone_lst.append(phone_number)
+    
+print(phone_lst)
+
+
+
 # 처음 구현한 코드 => 효율성 시간 초과
 def solution(phone_book):                              # 리스트 형태의 전화 번호 목록 받음
     cnt = 0                                            # 중복 횟수 기록 위한 초기값
@@ -10,6 +23,11 @@ def solution(phone_book):                              # 리스트 형태의 전
             else:                                      # 존재하지 않으면
                 answer = True                          # True 전달
     return answer
+start_time = time.time()
+solution(phone_lst)
+finish_time = time.time()
+efficiency = finish_time - start_time
+print(f'개선전 : {efficiency}')
 #--------------------------------------------------------------------------------------------------
 
 # 효율성 개선 코드
@@ -21,7 +39,10 @@ def solution(phone_book):                             # 리스트 형태의 전�
             answer = False                            # 만약 같으면 false 전달
             return answer                             # false이면 더이상 비교할 필요 없으므로 return후 종료
     return answer                                     # true일때 return True
-
-
+start_time = time.time()
+solution(phone_lst)
+finish_time = time.time()
+efficiency = finish_time - start_time
+print(f'개선후 : {efficiency}')
 # sort로 정렬한 후 옆에것만 비교하는 방식을 알면 정말 쉬운 문제인데 
 # 처음 보면 효율성 0점 결과에 당황하게되는 문제
