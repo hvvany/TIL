@@ -19,7 +19,7 @@
 
      
 
-     ![image-20220807183340946](2022-08-05-efficiency.assets/image-20220807183340946.png)
+     ![image-20220807183340946](2022-08-06-efficiency.assets/image-20220807183340946.png)
 
      
 
