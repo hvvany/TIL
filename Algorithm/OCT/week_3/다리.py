@@ -51,16 +51,16 @@ def solution(bridge_length, weight, truck_weights):
     sum_bridge = 0
     while truck_weights:
         if sum_bridge - on_bridge[0] + truck_weights[0] <= weight:
-            goog_bye = on_bridge.popleft()
+            good_bye = on_bridge.popleft()
             new_truck = truck_weights.popleft()
             on_bridge.append(new_truck)
             sum_bridge += new_truck
-            sum_bridge -= goog_bye
+            sum_bridge -= good_bye
             print(f'다리 if : {on_bridge}')
         else:
-            goog_bye = on_bridge.popleft()
+            good_bye = on_bridge.popleft()
             on_bridge.append(0)
-            sum_bridge -= goog_bye
+            sum_bridge -= good_bye
             print(f'다리 else : {on_bridge}')
         time += 1
         print(f'time = {time}\n')
