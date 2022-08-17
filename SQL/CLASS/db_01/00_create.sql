@@ -79,3 +79,5 @@ SELECT COUNT(*) FROM healthcare WHERE
   blood_pressure < 130 AND
   smoking=1 AND
   is_drinking=0;
+
+
