@@ -66,37 +66,37 @@ def solution(genres, plays):
       genres_dic[genres[i]] += [plays[i]]    # 이미 존재하는 장르
     else:
       genres_dic[genres[i]] = [plays[i]]     # 처음 들어온 장르
-  # print(f'genres_dic : {genres_dic}')
+
 
   # genres_sort 만들기 _ {'classic': [800, 500, 150], 'pop': [2500, 600]}
   for genre in genres_dic:
     genres_sort[genre] = sorted(genres_dic[genre],reverse=True)  # 장르 값을 큰 순서대로 genres_sort에 정렬 추가
-  # print(f'genres_sort : {genres_sort}')
+
 
   # genres_sum 만들기 _ {'classic': 1450, 'pop': 3100}
   for genre in genres_dic:
     genres_sum[genre] = sum(genres_dic[genre])
-  # print(f'genres_sum : {genres_sum}')
+
 
   # genres_list 만들기
   while genres_sum:       # 장르 합계로 내림차순으로 genres_list에 추가 후 pop
     play_max = 0          # 최대 재생 수 최신화 기록
     play_max_genre = 0    # 최대 재생 장르 최신화 기록
-    # print(f'for문 내부 genres_sum : {genres_sum}')
+
     for genre in genres_sum:
       if genres_sum[genre] > play_max:    # for문을 돌며 최대 재생수 장르 최신화
         play_max_genre = genre
         play_max = genres_sum[genre]
-        # print(f'play_max_genre : {play_max_genre}')
+
     genres_list.append(play_max_genre)    # 최대 재생수 장르 genres_list 추가
     genres_sum.pop(play_max_genre)        # 기록한 데이터는 삭제 pop
-  # print(f'genres_list : {genres_list}')
+
 
   # answer 만들기
-  for genre in genres_list:        # 장르 재생 수 많은 장르부터 가져옴
+  for genre in genres_list:                # 장르 재생 수 많은 장르부터 가져옴
     music_cnt = len(genres_dic[genre])     # 장르에 저장되어 있는 노래 수
 
-    if music_cnt >= 2:                     # 2곡 이상 저장되어 있는 경우 앨범 고유 번호 2개 answer 반환 가능
+    if music_cnt >= 2:                     # 2곡 이상 저장되어 있는 경우 앨범 고유 번호 2개 answer 추가
       for idx in range(len(plays)):
         if plays[idx] == genres_sort[genre][0] and genres[idx] == genre:
           plays[idx] = 0
@@ -108,7 +108,7 @@ def solution(genres, plays):
           answer.append(idx)
           break
 
-    elif music_cnt == 1:
+    elif music_cnt == 1:                   # 1곡만 저장되어 있는 경우 앨범 고유 번호 1개 answer 추가
       for idx in range(len(plays)):
         if plays[idx] == genres_sort[genre][0] and genres[idx] == genre:
           plays[idx] = 0
