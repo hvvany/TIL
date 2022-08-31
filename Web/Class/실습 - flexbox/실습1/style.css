@@ -1,0 +1,39 @@
+/* 아래에 CSS를 작성해주세요. */
+.title {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 37px;
+}
+.sub-title {
+  font-size: 25px;
+  font-weight: 600;
+}
+.card-list {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 50px;
+}
+.card {
+  width: 470px;
+  height: 700px;
+}
+.card-image {
+  width: 100%;
+  border-radius: 1rem;
+}
+.text-box {
+  margin: 15px 25px;
+}
+.instal {
+  margin: 5px 0px;
+}
+.bespoke {
+  font-weight: 600;
+  font-size: 23px;
+}
+p {
+  color: gray;
+  font-size: 13px;
+  line-height: 25px;
+}

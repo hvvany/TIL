@@ -1,0 +1,48 @@
+/* 아래에 CSS를 작성해주세요. */
+.card-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  /* align-self: center; */
+  margin-top: 100px;
+  width: 350px;
+}
+.card-image {
+  width: 100%;
+  border-radius: 0.3rem;
+}
+.text-card {
+  margin-left: 20px;
+}
+.company-name {
+  margin: 10px 0px;
+}
+.product-name {
+  font-size: 20px;
+  margin: 7px 0px;
+}
+.price-group {
+  margin: 7px 0px;
+}
+.sale {
+  font-size: 25px;
+  font-weight: 700;
+  color: rgb(0, 151, 239);
+  margin: 10px 5px 10px 0px;
+}
+.price {
+  font-size: 25px;
+  font-weight: 700;
+}
+.point {
+  font-weight: 700;
+  margin: 10px 5px 0px 0px;
+}
+.review-cnt {
+  font-weight: 700;
+  color: gray;
+}

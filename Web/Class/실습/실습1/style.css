@@ -1,0 +1,39 @@
+/* 아래에 CSS를 작성해주세요. */
+
+.title {
+  text-align: center;
+  font-size: xx-large;
+}
+h2 {
+  margin-top:0px;
+}
+.card-group {
+  margin-left: 100px;
+}
+.card {
+  width: 40rem;
+  height: 40rem;
+  display:inline-block;
+  margin: 40px;
+}
+.card-image {
+  width: 100%;
+  border-radius: 1rem;
+}
+.information {
+  margin-left:30px;
+}
+.first-title {
+  font-size: 20px;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  margin-left: 0px
+}
+.second-title {
+  font-size: 30px;
+  font-weight: 600;
+}
+.main {
+  margin : 15px;
+  margin-left: 0px;
+}
