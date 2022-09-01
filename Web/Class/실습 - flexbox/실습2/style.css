@@ -26,6 +26,8 @@
   margin: 7px 0px;
 }
 .price-group {
+  display:flex;
+  
   margin: 7px 0px;
 }
 .sale {
