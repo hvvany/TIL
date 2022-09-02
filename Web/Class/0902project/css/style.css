@@ -1,0 +1,124 @@
+body {
+  min-width: 1280px;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  padding: 40px;
+  height: 80px;
+  background-color: rgba(255, 255, 255, 0.96);
+  z-index: 1;
+}
+
+.nav-logo {
+  height: 60px;
+}
+
+.nav-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+}
+
+.nav-item {
+  padding: 1rem;
+  color: grey;
+}
+
+.nav-item:hover {
+  color:black;
+  background-color: rgba(207, 207, 207);
+  border-radius: 5px;
+  transform:scale(1.1);
+}
+
+.nav-list a {
+  text-decoration: none;
+}
+
+.banner-img {
+  background-image: url(../assets/background.jpg);
+  height : 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.banner-title {
+  font-size: 3rem;
+  font-weight: bold;
+}
+.contents {
+  display:flex;
+  min-width: 1000px;
+}
+.genre-list {
+  flex: 2;
+  padding : 1rem;
+  position: sticky;
+  top: 80px;
+  align-self: start;
+  min-width: 300px;
+}
+.genre-list-title {
+  font-weight: bold;
+}
+.genre-item {
+  color: black;
+}
+.genres {
+  list-style: none;
+  padding:0;
+}
+.read {
+  text-align: center;
+  padding: 24px;
+}
+.movie-ranking {
+  display: flex;
+  flex: 8;
+  background-color: rgb(235, 235, 235);
+  align-items: center;
+  flex-direction: column;
+  min-width: 1200px;
+}
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  width: 1200px;
+  justify-content: space-evenly;
+}
+.movie-card {
+  width: 300px;
+  margin: 0 50px;
+}
+.movie-img {
+  width: 100%;
+  border-radius: 1.5rem;
+}
+.movie-name {
+  font-weight: bold;
+  text-align: center;
+}
+.footer {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  justify-content: center;
+  align-items: center;
+}
+.movie-img:hover {
+  transform: scale(1.1);
+}
+.top-btn {
+  position: fixed;
+  bottom: 3rem;
+  right: 1rem;
+}
