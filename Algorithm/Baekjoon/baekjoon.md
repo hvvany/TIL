@@ -2178,3 +2178,45 @@ for i in dic:
 print(answer)
 ```
 
+
+
+---
+
+
+
+| 단계   | 문제번호 | 제목                                              |
+| ------ | -------- | ------------------------------------------------- |
+| 재귀_1 | 10872    | [팩토리얼](https://www.acmicpc.net/problem/10872) |
+
+#### 문제
+
+0보다 크거나 같은 정수 N이 주어진다. 이때, N!을 출력하는 프로그램을 작성하시오.
+
+#### 예시 입력
+
+```input
+10
+```
+
+#### 예시 출력
+
+```output
+3628800
+```
+
+#### 제출
+
+```python
+n = int(input())
+def Facto(k):
+  if k == 1:
+    return 1
+  else:
+    k*=Facto(k-1)
+    return k
+if n == 0:
+  print(1)
+else:
+  print(Facto(n))
+```
+
