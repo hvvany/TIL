@@ -1,6 +1,6 @@
 # JavaScript_Grammar
 
-
+#변수 #선언 #자료형 #문자열
 
 
 
@@ -145,4 +145,167 @@
   string;
   ```
 
+  ```javascript
+  var badString = string;
+  badString;
+  ```
   
+  문자열을 string 변수에 먼저 선언 후 다시 badString에 넣어주면 같은 값을 가지게 된다.
+
+- **따옴표 vs 쌍따옴표**
+
+  따옴표와 쌍따옴표 모두 허용 된다.
+
+  ```javascript
+  var sglDbl = 'Would you eat a "fish supper"?';
+  var dblSgl = "I'm feeling blue.";
+  ```
+
+  내부에 따옴표를 쓸 때는 감싸는 따옴표와 다르면 상관 없다.
+
+  ```javascript
+  var bigmouth = 'I\'ve got no right to take my place...';
+  ```
+
+  같은 따옴표를 쓰게 된다면 역슬래시로 문자 구분을 해주면 된다.
+
+- **문자열 연결하기**
+
+  더하기로 하면 된다
+
+  ```javascript
+  var one = 'Hello, ';
+  var two = 'how are you?';
+  var joined = one + two;
+  ```
+
+- **숫자 vs 문자열**
+
+  ```javascript
+  'Front ' + 242;
+  ```
+
+  => Front 242 
+
+  이 경우에는 숫자를 자동으로 문자열로 변환시켜 문자열로 연결시킨다.
+
+  - 문자열 -> 숫자
+
+  ```javascript
+  var myString = '123';            /* STRING */
+  var myNum = Number(myString);    /* NUMBER */
+  typeof myNum;
+  ```
+
+  => 123 은 number 데이터타입
+
+  - 숫자 -> 문자열
+
+  ```javascript
+  var myNum = 123;
+  var myString = myNum.toString();
+  typeof myString;
+  ```
+
+  => 123 은 string 데이터타입
+
+- **문자열 길이 찾기**
+
+  ```javascript
+  var browserType = 'mozilla';
+  browserType.length;
+  ```
+
+- **특정 문자열 찾기**
+
+  ```javascript
+  browserType[0];
+  ```
+
+- **마지막 문자 찾기**
+
+  ```javascript
+  browserType[browserType.length - 1];
+  ```
+
+- **특정 문자가 포함된 위치 찾기**
+
+  ```javascript
+  browserType.indexOf('zilla');
+  /* mozilla =>  2  */
+  browserType.indexOf('vanilla');
+  /* mozilla =>  -1     해당하는 문자열이 없으면 -1 */
+  ```
+
+- **슬라이싱**
+
+  ```javascript
+  browserType.slice(0, 3);
+  /* mozilla =>  moz */
+  browserType.slice(2);
+  /* mozilla =>  zilla */
+  ```
+
+- **대소문자 변환**
+
+  ```javascript
+  var radData = 'My NaMe Is MuD';
+  radData.toLowerCase();
+  radData.toUpperCase();
+  ```
+
+
+
+
+## 4. 배열
+
+> 배열이란 일반적으로 "**리스트같은 객체(list-like objects)**"라고 기술됩니다.
+
+- **배열 만들기**
+
+  ```javascript
+  var shopping = ['bread', 'milk', 'cheese', 'hummus', 'noodles'];
+  var sequence = [1, 1, 2, 3, 5, 8, 13];
+  var random = ['tree', 795, [0, 1, 2]];
+  ```
+
+- **인덱스 접근**
+
+  ```javascript
+  shopping[0];
+  // returns "bread"
+  
+  shopping[0] = 'tahini';
+  shopping;
+  // shopping will now return [ "tahini", "milk", "cheese", "hummus", "noodles" ]
+  ```
+
+- **배열의 갯수 알아내기 (lenght)**
+
+  ```javascript
+  sequence.length;
+  // should return 7
+  ```
+
+- **배열 원소 추가 제거 (push, pop)**
+
+  ```javascript
+  var myArray = ['Birmingham', 'Leeds', 'Carlisle'];
+  myArray.push('Cardiff');
+  myArray.push('Bradford', 'Brighton');
+  /* ['Birmingham', 'Leeds', 'Carlisle','Cardiff','Bradford', 'Brighton'] */
+  
+  myArray.pop();
+  /* ['Birmingham', 'Leeds', 'Carlisle','Cardiff','Bradford'] */
+  ```
+
+- **배열 원소 추가 제거 (unshift, shift)**
+
+  ```javascript
+  myArray.unshift('Edinburgh');
+  
+  var removedItem = myArray.shift();
+  ```
+
+  
+
