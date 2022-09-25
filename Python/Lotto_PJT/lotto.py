@@ -8,8 +8,8 @@ day_dif = day_now - day_init         # 기준 날짜와 차이 계산
 
 #입력값 받기
 day = int(input(f'비교 회차 개수 (최대 {1024+int((day_dif.days-1)/7)}회) : '))  # 날짜 차이 7로 나눠 최신 회차가 
-                                                                           # 몇 회차인지 파악하여 최대 입력값 설정
-pick_lst = list(map(int,input('1~45 사이 숫자 7개 입력 : ').split()))       # 선택한 숫자는 pick_lst에 저장
+                                                                            # 몇 회차인지 파악하여 최대 입력값 설정
+pick_lst = list(map(int,input('1~45 사이 숫자 7개 입력 : ').split()))        # 선택한 숫자는 pick_lst에 저장
 
 #프로그램 진행률 표현을 위한 초기값 설정
 per_cnt = 0        # 진행률(%) 표현을 위한 초기값
