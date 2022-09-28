@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class="text-center">전생 알아보기</h1>
+  <form method="GET" action="/before_life">
+    <div class="mb-3">
+      <label for="name" class="form-label">이름을 입력하세요</label>
+      <input type="text" class="form-control" id="name" name="name">
+    </div>
+    <button type="submit" class="btn btn-primary">전생 확인하기</button>
+  </form>
+
+  <h1> 한글 로렘 </h1>
+  <form method="GET" action="/lorem">
+    <div class="mb-3">
+      <label for="paragraph" class="form-label">문단 수 입력</label>
+      <input type="text" class="form-control" id="paragraph" name="paragraph">
+
+      <label for="word" class="form-label">문단별 단어 수</label>
+      <input type="text" class="form-control" id="word" name="word">
+    </div>
+
+    <button type="submit" class="btn btn-primary">전생 확인하기</button>
+  </form>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% for w in {{result}} %}
+    <p>
+      {{w}}
+    </p>
+    <hr>
+  {% endfor %}
+{% endblock %}
