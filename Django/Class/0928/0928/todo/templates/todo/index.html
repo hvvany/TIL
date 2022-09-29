@@ -5,27 +5,88 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
-  <h1>index.html입니다.</h1>
+  <h1 class="text-center">To do list</h1>
+  <div class="container">
+    <!--사용자에게 정보를 입력받을때 form 태그 사용. action : 어떤 url을 요청할지-->
+    <form action="{% url 'todo:create' %}" class="">
+      <div class="input-group mb-3 col-6">
+        <span class="input-group-text" id="inputGroup-sizing-default">할 일</span>
+        <input type="text" class="form-control" name="content___" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
 
-  <!--사용자에게 정보를 입력받을때 form 태그 사용. action : 어떤 url을 요청할지-->
-  <form action="{% url 'todo:create' %}">
-    <input type="text" name="content___" id="" maxlength="10">   <!-- 프론트 백에서 모두 글자 수 제한 해야 완벽하다.-->
-    <input type="submit" value="할 일 추가">
-  </form>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">우선 순위</span>
+        <select class="form-select" aria-label="Default select example" name="priority_">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option selected value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>  
+      
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-default">마감 기한</span>
+        <input type="date" class="form-control" name="deadline_" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+      </div>
 
-  <hr>
+      <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-outline-primary">할 일 추가</button>
+      </div>
+    </form>
 
-    <!--DTL for문 사용법-->
-  <ul>
-    {% for k in todo %}
-    <li>{{k.pk}} - {{k.content}} - {{k.completed}}
-      <a href="{% url 'todo:delete' k.pk %}">삭제</a>
-    </li>
-    {% endfor %}
-  </ul>
+    <table class="table text-center">
+      <thead>
+        <tr>
+          <th scope="col">우선 순위</th>
+          <th scope="col">할 일</th>
+          <th scope="col">생성 날짜</th>
+          <th scope="col">마감 기한</th>
+          <th scope="col">진행 상태</th>
+          <th scope="col">상태 변경</th>
+          <th scope="col">삭제</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for k in todo %}
+        <tr>
+          <th scope="row">{{ k.priority }}</th>
+          <td>{{ k.content }}</td>
+          <td>{{ k.created_at }}</td>
+          <td>{{ k.deadline }}</td>
+          <td>
+            {% if k.completed == False %}
+              미완료
+            {% else %}
+              완료
+            {% endif %}
+          </td>
+          <td>
+            <form action="{% url 'todo:completed' k.pk %}">
+              <button type="submit" class="btn btn-primary">완료/미완료</button>
+            </form>
+          </td>
+          <td>
+            <form action="{% url 'todo:delete' k.pk %}">
+              <button type="submit" class="btn btn-danger">삭제</button>
+            </form>
+          </td>
+          <td>
+            <form action="{% url 'todo:edit' k.pk %}">
+              <button type="submit" class="btn btn-danger">수정</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
 
+    
+  </div>
 
 </body>
 </html>

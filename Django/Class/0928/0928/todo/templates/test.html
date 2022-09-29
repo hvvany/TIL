@@ -1,0 +1,48 @@
+{% for todo in todos %}
+      {% if todo.completed == True %}
+      <tr class="p-2 text-decoration-line-through text-bg-dark opacity-50 rounded-3">
+        {% else %}
+      <tr class="p-2 rounded-3">
+        {% endif %}
+        <td>{{ todo.priority }}</td>
+        <td>{{ todo.content }}</td>
+        <td>{{ todo.created_at|date:'Y년 m월 d일' }}</td>
+        <td>{{ todo.deadline|date:'Y년 m월 d일' }}</td>
+        <td>
+          <p>{{ todo.pk }}</p>
+          <!-- button -->
+          <button type="button" class="btn btn-primary mx-1 p-1 px-2" data-bs-toggle="modal" data-bs-target="#modal1">
+            상세
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="modal1" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modal">{{ todo.content }}</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <p>{{ todo.pk }}</p>
+                  <p>{{ todo.created_at|date:'Y년 m월 d일' }}</p>
+                  <p>{{ todo.deadline|date:'Y년 m월 d일' }}</p>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <a class="btn btn-primary mx-1 p-1 px-2" href="{% url 'todos:update' todo.pk %}">
+            변경
+          </a>
+          <a class="btn btn-danger mx-1 p-1 px-2" href="{% url 'todos:delete' todo.pk %}">
+            삭제
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
