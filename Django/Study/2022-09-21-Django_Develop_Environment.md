@@ -89,3 +89,32 @@
 > localhost:8000 입력
 
 ![스크린샷(139)](2022-09-21-Django_Develop_Environment.assets/스크린샷(139).png)
+
+
+
+
+
+
+
+---
+
+
+
+
+
+9. **앱 생성**
+
+   ```bash
+   python manage.py startapp articles
+                          # 앱이름은 복수형 추천
+   ```
+
+10. **templates 생성**
+
+    ```bash
+    mkdir templates
+    ```
+
+    > 여러 어플 생성해도 templates 폴더는 하나로 묶인다.
+
+    
